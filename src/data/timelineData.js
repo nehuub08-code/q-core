@@ -1,10 +1,10 @@
-export const TIMELINE_MILESTONES = [
+export const CLASSICAL_TIMELINE = [
   {
     year: "1940s",
     title: "Vacuum Tubes",
     era: "First Generation Computing",
     subtitle: "Thermionic Valves & ENIAC",
-    color: "#F59E0B",
+    color: "#D97706",
     icon: "Radio",
     description: "Computing began with glass vacuum tubes controlling electrical current through a thermionic vacuum. Massive machines like ENIAC required thousands of tubes, consumed kilowatts of power, and generated intense heat.",
     specs: [
@@ -20,7 +20,7 @@ export const TIMELINE_MILESTONES = [
     title: "Discrete Transistors",
     era: "Second Generation Computing",
     subtitle: "Solid-State Silicon Revolution",
-    color: "#22C55E",
+    color: "#059669",
     icon: "Zap",
     description: "Invented at Bell Labs by Bardeen, Brattain, and Shockley. Transistors replaced delicate glass tubes with solid semiconductor crystals (Germanium and Silicon), dramatically shrinking computers and boosting reliability.",
     specs: [
@@ -36,7 +36,7 @@ export const TIMELINE_MILESTONES = [
     title: "Integrated Circuits",
     era: "Third Generation Computing",
     subtitle: "Planar Silicon Monoliths",
-    color: "#00E5FF",
+    color: "#0284C7",
     icon: "Layers",
     description: "Jack Kilby (Texas Instruments) and Robert Noyce (Fairchild) placed multiple interconnected transistors, resistors, and capacitors onto a single piece of semiconductor silicon wafer.",
     specs: [
@@ -52,7 +52,7 @@ export const TIMELINE_MILESTONES = [
     title: "Microprocessors",
     era: "Fourth Generation Computing",
     subtitle: "Single-Chip CPU Architecture",
-    color: "#38BDF8",
+    color: "#2563EB",
     icon: "Cpu",
     description: "The entire Central Processing Unit (ALU, Control Unit, Registers) was condensed onto a single silicon die. Led by Federico Faggin, Ted Hoff, and Stan Mazor at Intel with the iconic 4004 and 8086.",
     specs: [
@@ -68,7 +68,7 @@ export const TIMELINE_MILESTONES = [
     title: "Multi-Core & Supercomputing",
     era: "Modern Classical Peak",
     subtitle: "Gigahertz Parallelism & FinFETs",
-    color: "#6366F1",
+    color: "#4F46E5",
     icon: "Server",
     description: "Thermal limits (the 'Power Wall' and breakdown of Dennard scaling) forced architects to transition from raw clock frequency increases to multi-core parallelism, hyperthreading, and advanced 3nm EUV lithography.",
     specs: [
@@ -78,21 +78,93 @@ export const TIMELINE_MILESTONES = [
       { label: "Key Example", value: "AMD EPYC, Apple M-Series, Intel Core" }
     ],
     breakthrough: "Billions of nanometer-scale transistors running billions of calculations per second."
+  }
+];
+
+export const QUANTUM_TIMELINE = [
+  {
+    year: "1981",
+    title: "Feynman's Vision",
+    era: "Theoretical Foundations",
+    subtitle: "Simulating Physics with Quantum Mechanics",
+    color: "#D97706",
+    icon: "Radio",
+    description: "Nobel laureate Richard Feynman famously noted that classical computers cannot efficiently simulate quantum mechanical systems. He proposed designing machines based on quantum physics itself.",
+    specs: [
+      { label: "Core Concept", value: "Quantum Hamiltonian Simulation" },
+      { label: "Nature", value: "Theoretical physics keynote" },
+      { label: "Key Paper", value: "Simulating Physics with Computers (1982)" },
+      { label: "Key Figure", value: "Richard Feynman & Paul Benioff" }
+    ],
+    breakthrough: "Established that quantum phenomena could be harnessed directly for computational advantage."
   },
   {
-    year: "Present - Future",
-    title: "Quantum Computing",
-    era: "Fifth Generation & Beyond",
-    subtitle: "Superconducting Qubits & Entanglement",
-    color: "#7C4DFF",
-    icon: "Atom",
-    description: "Transcending binary bits entirely. Quantum processors harness non-classical phenomena—superposition of states and quantum entanglement—operating at 15 milliKelvin to solve previously intractable problems in seconds.",
+    year: "1994 - 1996",
+    title: "Quantum Algorithms",
+    era: "Algorithmic Discovery",
+    subtitle: "Shor's & Grover's Speedups",
+    color: "#059669",
+    icon: "Zap",
+    description: "Peter Shor published a polynomial-time quantum algorithm to factor large prime integers, threatening RSA cryptography. Lov Grover followed with a quadratic search acceleration algorithm.",
     specs: [
-      { label: "Fundamental Unit", value: "Qubit (|0⟩, |1⟩, or superposition)" },
-      { label: "Parallelism", value: "2^N states computed simultaneously" },
-      { label: "Operating Temp", value: "~15 mK (Colder than deep space)" },
-      { label: "Key Example", value: "IBM Quantum Condor, Google Sycamore" }
+      { label: "Factoring Speed", value: "Polynomial O((log N)^3)" },
+      { label: "Search Speed", value: "Quadratic O(sqrt(N))" },
+      { label: "Impact", value: "Proved commercial & cybersecurity value" },
+      { label: "Key Example", value: "Shor's Algorithm (1994), Grover's (1996)" }
     ],
-    breakthrough: "Exponential speed-up on quantum chemistry, prime factorization, and optimization."
+    breakthrough: "Mathematically proved that quantum computing can achieve exponential speedup over classical algorithms."
+  },
+  {
+    year: "1998 - 2000s",
+    title: "First Physical Qubits",
+    era: "Laboratory Experimental Stage",
+    subtitle: "NMR & Superconducting Transmons",
+    color: "#0284C7",
+    icon: "Layers",
+    description: "Researchers built the first 2-qubit working processors using Nuclear Magnetic Resonance (NMR) and cavity quantum electrodynamics. In 2007, Yale introduced the transmon qubit, solving charge noise.",
+    specs: [
+      { label: "Qubit Count", value: "2 to 7 physical qubits" },
+      { label: "Coherence Time", value: "Nanoseconds to microseconds" },
+      { label: "Cooling Tech", value: "Dilution Refrigerators (15 mK)" },
+      { label: "Key Example", value: "Yale Transmon Resonator (2007)" }
+    ],
+    breakthrough: "Transitioned quantum mechanics from abstract mathematical formulas into tangible solid-state hardware."
+  },
+  {
+    year: "2019",
+    title: "Quantum Supremacy",
+    era: "NISQ Era (Noisy Intermediate Scale)",
+    subtitle: "Google Sycamore 53-Qubit Processor",
+    color: "#2563EB",
+    icon: "Atom",
+    description: "Google's 53-qubit superconducting Sycamore chip performed a specific random circuit sampling benchmark in 200 seconds that would take the world's fastest supercomputer thousands of years.",
+    specs: [
+      { label: "Physical Qubits", value: "53 Superconducting Transmons" },
+      { label: "Execution Time", value: "200 seconds" },
+      { label: "Two-Qubit Error", value: "~0.6% gate fidelity" },
+      { label: "Key Example", value: "Google Sycamore (Nature 2019)" }
+    ],
+    breakthrough: "First experimental demonstration of quantum computational advantage over classical supercomputing."
+  },
+  {
+    year: "2024 - Beyond",
+    title: "Fault-Tolerant & Logical QPUs",
+    era: "Commercial Utility Era",
+    subtitle: "Quantum Error Correction (QEC)",
+    color: "#7C3AED",
+    icon: "Cpu",
+    description: "IBM Heron (133 qubits with tunable couplers) and Harvard/QuEra neutral atom arrays demonstrated logical error-corrected qubits, moving quantum technology toward production enterprise utility.",
+    specs: [
+      { label: "Logical Qubits", value: "48+ error-corrected logical qubits" },
+      { label: "Gate Fidelity", value: "Exceeding 99.9% 2-qubit thresholds" },
+      { label: "Applications", value: "VQE chemistry, material science, PQC" },
+      { label: "Key Example", value: "IBM Heron / Condor, Harvard QEC" }
+    ],
+    breakthrough: "Mitigating quantum decoherence with surface codes to enable deep fault-tolerant quantum algorithms."
   }
+];
+
+export const TIMELINE_MILESTONES = [
+  ...CLASSICAL_TIMELINE,
+  QUANTUM_TIMELINE[3]
 ];

@@ -192,22 +192,22 @@ export default function Core3DCanvas({ mode = "quantum", onModeToggle }) {
   const [wireframe, setWireframe] = useState(false);
 
   return (
-    <div className="relative w-full h-[420px] md:h-[500px] rounded-3xl overflow-hidden glass-panel border border-white/10 glow-cyan">
+    <div className="relative w-full h-[420px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 border border-slate-200 shadow-lg shadow-slate-200/50">
       {/* 3D Canvas */}
       <Canvas
         camera={{ position: [3.2, 2.6, 3.8], fov: 48 }}
         onPointerOver={() => setIsHovered(true)}
         onPointerOut={() => setIsHovered(false)}
       >
-        <ambientLight intensity={0.7} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#00E5FF" />
-        <pointLight position={[-10, -5, -10]} intensity={1.2} color="#7C4DFF" />
+        <ambientLight intensity={1.2} />
+        <pointLight position={[10, 10, 10]} intensity={1.8} color="#2563EB" />
+        <pointLight position={[-10, -5, -10]} intensity={1.5} color="#7C3AED" />
         <spotLight
           position={[0, 8, 2]}
           angle={0.4}
           penumbra={1}
-          intensity={2}
-          color={mode === "quantum" ? "#7C4DFF" : "#00E5FF"}
+          intensity={2.5}
+          color={mode === "quantum" ? "#7C3AED" : "#2563EB"}
         />
 
         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
@@ -229,31 +229,31 @@ export default function Core3DCanvas({ mode = "quantum", onModeToggle }) {
 
       {/* Floating UI Controls inside Canvas Card */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-        <div className="bg-[#050B18]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-2 pointer-events-auto shadow-lg">
+        <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-slate-200 flex items-center gap-2 pointer-events-auto shadow-sm">
           <div
             className={`w-2.5 h-2.5 rounded-full animate-ping ${
-              mode === "quantum" ? "bg-[#7C4DFF]" : "bg-[#00E5FF]"
+              mode === "quantum" ? "bg-indigo-600" : "bg-blue-600"
             }`}
           />
-          <span className="font-['Orbitron'] text-xs font-bold tracking-wider uppercase text-white">
-            {mode === "quantum" ? "Superconducting QPU" : "Silicon CMOS CPU"}
+          <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold tracking-wider uppercase text-slate-800">
+            {mode === "quantum" ? "Superconducting QPU (15 mK)" : "Silicon CMOS CPU (3.5 GHz)"}
           </span>
         </div>
 
         <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={() => setWireframe(!wireframe)}
-            className={`px-2.5 py-1 text-[11px] font-mono rounded-lg border transition-all ${
+            className={`px-3 py-1.5 text-xs font-mono rounded-xl border transition-all cursor-pointer shadow-xs ${
               wireframe
-                ? "bg-[#00E5FF]/20 border-[#00E5FF] text-[#00E5FF]"
-                : "bg-[#050B18]/70 border-white/10 text-[#94A3B8] hover:text-white"
+                ? "bg-blue-600 border-blue-600 text-white"
+                : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
             }`}
           >
             {wireframe ? "Solid View" : "Wireframe"}
           </button>
           <button
             onClick={onModeToggle}
-            className="px-3 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-[#00E5FF]/20 to-[#7C4DFF]/20 border border-white/20 hover:border-[#00E5FF] text-white transition-all shadow-md active:scale-95"
+            className="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-slate-900 hover:bg-blue-600 text-white transition-all shadow-sm active:scale-95 cursor-pointer"
           >
             Switch to {mode === "quantum" ? "Classical" : "Quantum"}
           </button>
@@ -262,7 +262,7 @@ export default function Core3DCanvas({ mode = "quantum", onModeToggle }) {
 
       {/* Bottom Hint */}
       <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none">
-        <span className="text-[11px] text-[#94A3B8]/70 font-['Space_Grotesk'] tracking-wide">
+        <span className="text-[11px] text-slate-500 font-medium px-3 py-1 rounded-full bg-white/80 border border-slate-200/80 shadow-xs backdrop-blur-sm">
           ✦ Drag to rotate • Scroll to zoom • Right-click to pan
         </span>
       </div>

@@ -24,22 +24,15 @@ export function ThemeProvider({ children }) {
   }, []);
 
   const toggleTheme = () => {
-    setIsDark((prev) => {
-      const next = !prev;
-      const root = document.documentElement;
-      if (next) {
-        root.classList.remove("light");
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-        root.classList.add("light");
-      }
-      return next;
-    });
+    // Keep in Bright Mode as requested
+    const root = document.documentElement;
+    root.classList.remove("dark");
+    root.classList.add("light");
+    setIsDark(false);
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDark: false, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

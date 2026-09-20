@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { Award, Printer, X, Download, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
+import { Award, Printer, X, Sparkles } from "lucide-react";
 import { INSTITUTION_INFO } from "../../data/academicContent";
 import { sound } from "../../utils/audioEffects";
 
@@ -8,14 +8,13 @@ export default function CertificateModal({ score = 100, accuracy = 100, timeSpen
   const [studentName, setStudentName] = useState("Engineering Student");
 
   useEffect(() => {
-    // Blast festive celebratory confetti
     sound.playSuccess();
     try {
       confetti({
         particleCount: 120,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ["#00E5FF", "#7C4DFF", "#22C55E", "#F59E0B", "#FFFFFF"]
+        colors: ["#2563EB", "#7C3AED", "#059669", "#EA580C", "#0284C7"]
       });
     } catch (e) {}
   }, []);
@@ -32,61 +31,61 @@ export default function CertificateModal({ score = 100, accuracy = 100, timeSpen
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050B18]/90 backdrop-blur-2xl overflow-y-auto">
-      <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-white/20 max-w-3xl w-full relative space-y-6 shadow-[0_0_60px_rgba(0,229,255,0.3)] my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md overflow-y-auto">
+      <div className="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 max-w-3xl w-full relative space-y-6 shadow-2xl my-8">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-white/5 border border-white/10 text-[#94A3B8] hover:text-white"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-900 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header Congratulatory Banner */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22C55E]/15 border border-[#22C55E]/40 text-[#22C55E] text-xs font-['Orbitron'] font-bold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5" />
             Curriculum Certification Eligible
           </div>
-          <h3 className="font-['Orbitron'] font-black text-2xl sm:text-3xl text-white">
+          <h3 className="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl sm:text-3xl text-slate-900">
             Congratulations on Completing Q-CORE!
           </h3>
-          <p className="text-xs sm:text-sm text-[#94A3B8]">
-            You have successfully mastered the principles of Classical and Quantum Microprocessors.
+          <p className="text-xs sm:text-sm text-slate-600">
+            You have successfully demonstrated practical and theoretical mastery of Classical and Quantum Microprocessors.
           </p>
         </div>
 
         {/* Student Name Input */}
         <div className="max-w-md mx-auto space-y-1.5 text-center">
-          <label className="text-xs font-mono text-[#00E5FF] font-bold">
+          <label className="text-xs font-bold text-slate-700 block">
             Enter Your Full Name for Certificate:
           </label>
           <input
             type="text"
             value={studentName}
             onChange={(e) => setStudentName(e.target.value)}
-            className="w-full text-center bg-black/60 border border-white/20 rounded-xl px-4 py-2.5 text-white font-['Space_Grotesk'] text-lg font-bold focus:border-[#00E5FF] focus:outline-none"
+            className="w-full text-center bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-bold text-lg focus:border-blue-600 focus:outline-none focus:bg-white"
             placeholder="Your Name"
           />
         </div>
 
         {/* Performance Statistics Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
-            <span className="text-[10px] text-[#94A3B8] font-mono block">Overall Score</span>
-            <span className="font-['Orbitron'] font-bold text-lg text-[#00E5FF]">{score} pts</span>
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Overall Score</span>
+            <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-xl text-blue-600">{score} pts</span>
           </div>
-          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
-            <span className="text-[10px] text-[#94A3B8] font-mono block">Accuracy</span>
-            <span className="font-['Orbitron'] font-bold text-lg text-[#22C55E]">{accuracy}%</span>
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Accuracy</span>
+            <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-xl text-emerald-600">{accuracy}%</span>
           </div>
-          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
-            <span className="text-[10px] text-[#94A3B8] font-mono block">Duration</span>
-            <span className="font-['Orbitron'] font-bold text-lg text-[#F59E0B]">{timeSpent}</span>
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Session Time</span>
+            <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-xl text-amber-600">{timeSpent}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
-            <span className="text-[10px] text-[#94A3B8] font-mono block">Achieved Rank</span>
-            <span className="font-['Space_Grotesk'] font-bold text-xs text-[#7C4DFF] block truncate">
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Achieved Rank</span>
+            <span className="font-['Plus_Jakarta_Sans'] font-bold text-xs text-indigo-600 block truncate mt-1">
               {getRank(accuracy).split("&")[0]}
             </span>
           </div>
@@ -95,46 +94,40 @@ export default function CertificateModal({ score = 100, accuracy = 100, timeSpen
         {/* Formal Printable Diploma Certificate Container */}
         <div
           id="printable-certificate"
-          className="p-8 sm:p-10 rounded-2xl border-4 border-[#00E5FF]/40 bg-[#0B1220] relative text-center space-y-5 overflow-hidden shadow-inner"
+          className="p-8 sm:p-10 rounded-2xl border-2 border-blue-600/30 bg-slate-50 relative text-center space-y-5 overflow-hidden shadow-inner"
         >
-          {/* Subtle Watermark Corner Brackets */}
-          <div className="absolute top-2 left-2 text-[#00E5FF]/30 font-mono text-xs">╔═══════</div>
-          <div className="absolute top-2 right-2 text-[#00E5FF]/30 font-mono text-xs">═══════╗</div>
-          <div className="absolute bottom-2 left-2 text-[#00E5FF]/30 font-mono text-xs">╚═══════</div>
-          <div className="absolute bottom-2 right-2 text-[#00E5FF]/30 font-mono text-xs">═══════╝</div>
-
           <div className="space-y-1">
-            <h5 className="font-['Orbitron'] text-xs font-black tracking-widest text-[#00E5FF] uppercase">
+            <h5 className="text-xs font-black tracking-widest text-blue-700 uppercase">
               {INSTITUTION_INFO.college}
             </h5>
-            <p className="text-[11px] text-[#94A3B8] font-mono">
+            <p className="text-[11px] text-slate-600 font-medium">
               {INSTITUTION_INFO.department} • {INSTITUTION_INFO.campus}
             </p>
           </div>
 
           <div className="py-2">
-            <span className="text-xs uppercase font-mono text-white/60 tracking-widest block">
-              Certificate of Educational Mastery
+            <span className="text-xs uppercase font-semibold text-slate-500 tracking-widest block">
+              Certificate of Academic Excellence
             </span>
-            <h2 className="font-['Orbitron'] font-black text-2xl sm:text-3xl text-white tracking-wide mt-2">
+            <h2 className="font-['Plus_Jakarta_Sans'] font-black text-2xl sm:text-3xl text-slate-900 tracking-tight mt-2">
               {studentName}
             </h2>
           </div>
 
-          <p className="text-xs text-[#94A3B8] max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs text-slate-600 max-w-lg mx-auto leading-relaxed">
             Has successfully demonstrated comprehensive academic understanding and practical simulation skills in{" "}
-            <strong className="text-white">Computer Architecture & Organization</strong>, covering both{" "}
-            <strong className="text-[#00E5FF]">Classical Von Neumann Microprocessors</strong> and{" "}
-            <strong className="text-[#7C4DFF]">Superconducting Quantum Processors (QPU)</strong>.
+            <strong className="text-slate-900">Computer Architecture & Organization</strong>, covering both{" "}
+            <strong className="text-blue-600">Classical Von Neumann Microprocessors</strong> and{" "}
+            <strong className="text-indigo-600">Superconducting Quantum Processors (QPU)</strong>.
           </p>
 
-          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#94A3B8]">
+          <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-600">
             <div className="text-left">
-              <span className="block text-white font-bold">Honors Rank:</span>
-              <span className="text-[#00E5FF]">{getRank(accuracy)}</span>
+              <span className="block text-slate-900 font-bold">Honors Rank:</span>
+              <span className="text-blue-600 font-bold">{getRank(accuracy)}</span>
             </div>
             <div className="text-right">
-              <span className="block text-white font-bold">Verification:</span>
+              <span className="block text-slate-900 font-bold">Verification ID:</span>
               <span>Q-CORE-DYPCOEI-2026-CERT</span>
             </div>
           </div>
@@ -144,16 +137,16 @@ export default function CertificateModal({ score = 100, accuracy = 100, timeSpen
         <div className="flex flex-wrap items-center justify-end gap-3 pt-2">
           <button
             onClick={handlePrint}
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#7C4DFF] text-[#050B18] font-bold text-xs font-['Orbitron'] flex items-center gap-2 shadow-lg glow-cyan hover:opacity-90"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 shadow-sm transition-all"
           >
             <Printer className="w-4 h-4" />
             <span>Print / Save PDF Certificate</span>
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs font-mono hover:bg-white/10"
+            className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold transition-all"
           >
-            Done
+            Close
           </button>
         </div>
       </div>

@@ -16,12 +16,26 @@ import {
   GraduationCap
 } from "lucide-react";
 import { sound } from "../../utils/audioEffects";
+import SectionModeToggle from "../common/SectionModeToggle";
 
 export default function PresentationDeck() {
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [slideFilter, setSlideFilter] = useState("classical");
+  const [currentSlide, setCurrentSlide] = useState(2);
   const [viewMode, setViewMode] = useState("deck"); // 'deck' | 'grid'
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const classicalSlideNums = [1, 2, 3, 4, 8];
+  const quantumSlideNums = [1, 5, 6, 7, 8, 9];
+
+  const handleFilterChange = (mode) => {
+    setSlideFilter(mode);
+    if (mode === "classical" && !classicalSlideNums.includes(currentSlide)) {
+      setCurrentSlide(2);
+    } else if (mode === "quantum" && !quantumSlideNums.includes(currentSlide)) {
+      setCurrentSlide(5);
+    }
+  };
 
   const totalSlides = 9;
 
@@ -97,14 +111,30 @@ export default function PresentationDeck() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const filteredSlides = slidesMeta.filter((s) =>
+    slideFilter === "classical"
+      ? classicalSlideNums.includes(s.num)
+      : quantumSlideNums.includes(s.num)
+  );
+
   const nextSlide = () => {
     sound.playClick();
-    setCurrentSlide((prev) => (prev < totalSlides ? prev + 1 : 1));
+    const currentIdx = filteredSlides.findIndex((s) => s.num === currentSlide);
+    if (currentIdx === -1 || currentIdx === filteredSlides.length - 1) {
+      setCurrentSlide(filteredSlides[0].num);
+    } else {
+      setCurrentSlide(filteredSlides[currentIdx + 1].num);
+    }
   };
 
   const prevSlide = () => {
     sound.playClick();
-    setCurrentSlide((prev) => (prev > 1 ? prev - 1 : totalSlides));
+    const currentIdx = filteredSlides.findIndex((s) => s.num === currentSlide);
+    if (currentIdx <= 0) {
+      setCurrentSlide(filteredSlides[filteredSlides.length - 1].num);
+    } else {
+      setCurrentSlide(filteredSlides[currentIdx - 1].num);
+    }
   };
 
   const selectSlide = (num) => {
@@ -186,12 +216,20 @@ export default function PresentationDeck() {
           </div>
         </div>
 
+        {/* Section Mode Filter Buttons */}
+        <SectionModeToggle
+          mode={slideFilter}
+          onModeChange={handleFilterChange}
+          classicalLabel="Classical Microprocessor Slides"
+          quantumLabel="Quantum Microprocessor Slides"
+        />
+
         {/* 1. Presentation Mode (16:9 Cinematic Screen with exact slide) */}
         {viewMode === "deck" && (
           <div className="space-y-6">
-            <div className="bg-white dark:bg-slate-900/70 p-4 sm:p-6 rounded-3xl border border-slate-200 dark:border-white/10 space-y-4 shadow-sm backdrop-blur-md">
+            <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 space-y-4 shadow-sm">
               {/* Slide Screen Container (16:9 Aspect Ratio) */}
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl flex items-center justify-center group">
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900 border border-slate-300 shadow-xl flex items-center justify-center group">
                 <img
                   src={`${import.meta.env.BASE_URL}slides/slide-${currentSlide}.png`}
                   alt={`Slide ${currentSlide}: ${slidesMeta[currentSlide - 1]?.title}`}
@@ -201,25 +239,25 @@ export default function PresentationDeck() {
                 {/* Left / Right Hover Arrows */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white flex items-center justify-center opacity-70 hover:opacity-100 hover:scale-105 transition-all shadow-lg"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-105 transition-all shadow-lg cursor-pointer"
                   title="Previous Slide (or Left Arrow)"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white flex items-center justify-center opacity-70 hover:opacity-100 hover:scale-105 transition-all shadow-lg"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-105 transition-all shadow-lg cursor-pointer"
                   title="Next Slide (or Right Arrow)"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
 
                 {/* Floating Top Badge */}
-                <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-700 text-xs font-semibold text-blue-400 shadow-xs">
-                  Slide {currentSlide} of {totalSlides}
+                <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-700 text-xs font-semibold text-blue-400 shadow-xs">
+                  Slide {currentSlide} of {totalSlides} ({slideFilter === "classical" ? "Classical Track" : "Quantum Track"})
                 </div>
 
-                <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-700 text-xs font-medium text-slate-300 shadow-xs">
+                <div className="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-700 text-xs font-medium text-slate-200 shadow-xs">
                   {slidesMeta[currentSlide - 1]?.title}
                 </div>
               </div>
@@ -260,18 +298,18 @@ export default function PresentationDeck() {
 
             {/* Thumbnail Strip */}
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
-                Slide Thumbnails:
+              <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider block">
+                {slideFilter === "classical" ? "Classical Track Slides:" : "Quantum Track Slides:"}
               </span>
-              <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2">
-                {slidesMeta.map((s) => (
+              <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-2">
+                {filteredSlides.map((s) => (
                   <button
                     key={s.num}
                     onClick={() => selectSlide(s.num)}
-                    className={`relative aspect-[16/9] rounded-xl overflow-hidden border-2 transition-all group ${
+                    className={`relative aspect-[16/9] rounded-xl overflow-hidden border-2 transition-all cursor-pointer group ${
                       currentSlide === s.num
-                        ? "border-blue-600 shadow-sm scale-105"
-                        : "border-slate-200 dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-500/50 opacity-70 hover:opacity-100"
+                        ? "border-blue-600 shadow-md scale-105"
+                        : "border-slate-200 hover:border-blue-400 opacity-80 hover:opacity-100"
                     }`}
                     title={`Go to slide ${s.num}: ${s.title}`}
                   >
@@ -280,7 +318,7 @@ export default function PresentationDeck() {
                       alt={s.title}
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute bottom-1 left-1 bg-black/80 px-1 rounded text-[9px] font-mono text-white font-bold">
+                    <span className="absolute bottom-1 left-1 bg-slate-900/90 px-1 rounded text-[9px] font-mono text-white font-bold">
                       {s.num}
                     </span>
                   </button>
@@ -290,16 +328,16 @@ export default function PresentationDeck() {
           </div>
         )}
 
-        {/* 2. Grid View: All 9 Slides As-Is */}
+        {/* 2. Grid View: Filtered Slides */}
         {viewMode === "grid" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {slidesMeta.map((slide) => (
+            {filteredSlides.map((slide) => (
               <div
                 key={slide.num}
-                className="bg-white dark:bg-slate-900/60 rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 hover:border-blue-500/50 transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-sm"
+                className="bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-blue-500 transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md"
               >
                 <div>
-                  <div className="relative aspect-[16/9] bg-slate-950 overflow-hidden">
+                  <div className="relative aspect-[16/9] bg-slate-900 overflow-hidden">
                     <img
                       src={`${import.meta.env.BASE_URL}slides/slide-${slide.num}.png`}
                       alt={slide.title}
@@ -310,16 +348,16 @@ export default function PresentationDeck() {
                         setViewMode("deck");
                       }}
                     />
-                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 text-[10px] font-mono font-bold text-blue-400 border border-white/10">
+                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-slate-900/90 text-[10px] font-mono font-bold text-blue-400 border border-slate-700">
                       Slide 0{slide.num}
                     </div>
                   </div>
 
                   <div className="p-4 space-y-1.5">
-                    <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                       {slide.title}
                     </h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                       {slide.desc}
                     </p>
                   </div>
@@ -332,7 +370,7 @@ export default function PresentationDeck() {
                       setCurrentSlide(slide.num);
                       setViewMode("deck");
                     }}
-                    className="w-full py-2 rounded-xl bg-slate-100 hover:bg-blue-600 hover:text-white dark:bg-white/5 dark:hover:bg-blue-600 dark:hover:text-white border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-all text-center shadow-xs"
+                    className="w-full py-2 rounded-xl bg-slate-100 hover:bg-blue-600 hover:text-white border border-slate-200 text-xs font-semibold text-slate-700 transition-all text-center shadow-xs cursor-pointer"
                   >
                     View in Presentation Deck
                   </button>

@@ -4,6 +4,7 @@ import { ArrowRight, Play, Sparkles, Cpu, Atom, BookOpen, Layers } from "lucide-
 import Core3DCanvas from "./Core3DCanvas";
 import { INSTITUTION_INFO } from "../../data/academicContent";
 import { sound } from "../../utils/audioEffects";
+import SectionModeToggle from "../common/SectionModeToggle";
 
 export default function Hero({ onNavigate }) {
   const [coreMode, setCoreMode] = useState("quantum");
@@ -91,31 +92,42 @@ export default function Hero({ onNavigate }) {
               transform: `translate3d(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px, 0)`
             }}
           >
+            {/* Dynamic Section Mode Switcher */}
+            <SectionModeToggle
+              mode={coreMode}
+              onModeChange={(m) => setCoreMode(m)}
+              classicalLabel="Classical Microprocessors"
+              quantumLabel="Quantum Microprocessors"
+            />
+
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-wide">
-                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-                Next-Gen Computing Architecture
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold tracking-wide">
+                <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                {coreMode === "classical"
+                  ? "Classical Silicon Microprocessor • Von Neumann Architecture"
+                  : "Superconducting Quantum Microprocessor • Sub-Kelvin QPU"}
               </div>
-              <h1 className="font-['Plus_Jakarta_Sans'] font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-white leading-[1.08]">
-                Quantum vs Classical
-                <span className="block text-blue-600 dark:text-blue-400 mt-1">
+              <h1 className="font-['Plus_Jakarta_Sans'] font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 leading-[1.08]">
+                {coreMode === "classical" ? "Classical Silicon" : "Quantum Superconducting"}
+                <span className={`block mt-1 ${coreMode === "classical" ? "text-blue-600" : "text-indigo-600"}`}>
                   Microprocessors
                 </span>
               </h1>
             </div>
 
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed">
-              Explore the transition from deterministic binary silicon architectures to sub-Kelvin quantum superposition processors.
-              Featuring interactive labs, 3D hardware inspection, and real-time algorithm execution.
+            <p className="text-base sm:text-lg text-slate-600 max-w-xl font-normal leading-relaxed">
+              {coreMode === "classical"
+                ? "Standardized binary computing using billions of nanometer-scale silicon CMOS transistors running deterministic ALU operations, cache hierarchies, and the continuous Fetch-Decode-Execute pipeline at room temperature."
+                : "Non-classical computing harnessing quantum superposition and entanglement at 15 milliKelvin. Transmon qubits process exponentially large Hilbert spaces simultaneously to solve previously intractable problems in seconds."}
             </p>
 
             {/* Sub-tagline */}
-            <div className="flex items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
-              <span className="text-blue-600 dark:text-blue-400">Explore</span>
-              <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="text-indigo-600 dark:text-indigo-400">Simulate</span>
-              <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="text-slate-700 dark:text-slate-300">Understand</span>
+            <div className="flex items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm font-semibold tracking-wider text-slate-500 uppercase">
+              <span className="text-blue-600 font-bold">{coreMode === "classical" ? "CMOS SILICON" : "TRANSMON QUBITS"}</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-indigo-600 font-bold">{coreMode === "classical" ? "3.5+ GHZ CLOCK" : "15 MK CRYOSTAT"}</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-emerald-600 font-bold">{coreMode === "classical" ? "DETERMINISTIC" : "EXPONENTIAL PARALLEL"}</span>
             </div>
 
             {/* Action Buttons */}
@@ -125,10 +137,23 @@ export default function Hero({ onNavigate }) {
                   sound.playQuantumBeep();
                   onNavigate("labs");
                 }}
-                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm flex items-center gap-2 shadow-sm transition-all hover:shadow hover:-translate-y-0.5 active:translate-y-0"
+                className={`px-6 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 shadow-sm transition-all hover:shadow hover:-translate-y-0.5 active:translate-y-0 cursor-pointer ${
+                  coreMode === "classical" ? "bg-blue-600 hover:bg-blue-700" : "bg-indigo-600 hover:bg-indigo-700"
+                }`}
               >
                 <Play className="w-4 h-4 fill-current" />
-                <span>Enter Virtual Labs</span>
+                <span>{coreMode === "classical" ? "Test CPU in Lab 01" : "Explore Qubits in Lab 02"}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  sound.playClick();
+                  onNavigate(coreMode === "classical" ? "classical" : "quantum");
+                }}
+                className="px-6 py-3 rounded-xl bg-white border border-slate-200 hover:border-blue-500 text-slate-800 font-semibold text-sm flex items-center gap-2 shadow-xs transition-all hover:bg-slate-50 cursor-pointer"
+              >
+                <span>{coreMode === "classical" ? "Classical 3D Die & Cycles" : "Quantum Bloch & Cryo"}</span>
+                <ArrowRight className="w-4 h-4 text-blue-600" />
               </button>
 
               <button
@@ -136,52 +161,41 @@ export default function Hero({ onNavigate }) {
                   sound.playClick();
                   onNavigate("comparison");
                 }}
-                className="px-6 py-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 hover:border-blue-500 text-slate-800 dark:text-slate-200 font-semibold text-sm flex items-center gap-2 shadow-xs transition-all hover:bg-slate-50 dark:hover:bg-slate-800 active:translate-y-0"
+                className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-sm font-semibold transition-all cursor-pointer"
               >
-                <span>Comparison Center</span>
-                <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              </button>
-
-              <button
-                onClick={() => {
-                  sound.playClick();
-                  onNavigate("quiz");
-                }}
-                className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200/70 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-slate-700 dark:text-slate-300 text-sm font-semibold transition-all"
-              >
-                Knowledge Assessment
+                Comparison Matrix
               </button>
             </div>
 
             {/* Quick Curriculum Indicators */}
-            <div className="pt-4 grid grid-cols-3 gap-3 border-t border-slate-200 dark:border-white/10 text-left">
-              <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-xs">
-                <div className="flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 font-bold">
+            <div className="pt-4 grid grid-cols-3 gap-3 border-t border-slate-200 text-left">
+              <div className="bg-white border border-slate-200 p-3 rounded-xl shadow-xs">
+                <div className="flex items-center gap-1.5 text-xs text-blue-600 font-bold">
                   <Cpu className="w-3.5 h-3.5" />
-                  <span>Classical</span>
+                  <span>{coreMode === "classical" ? "Unit: Bits" : "Unit: Qubits"}</span>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
-                  Fetch-Decode-Execute
+                <div className="text-xs text-slate-600 mt-1 font-mono">
+                  {coreMode === "classical" ? "Definite 0 or 1" : "α|0⟩ + β|1⟩ Superposition"}
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-xs">
-                <div className="flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 font-bold">
+              <div className="bg-white border border-slate-200 p-3 rounded-xl shadow-xs">
+                <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-bold">
                   <Atom className="w-3.5 h-3.5" />
-                  <span>Quantum</span>
+                  <span>{coreMode === "classical" ? "Pipeline" : "Gates"}</span>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
-                  Superposition & Gates
+                <div className="text-xs text-slate-600 mt-1 font-mono">
+                  {coreMode === "classical" ? "Fetch-Decode-Execute" : "Hadamard & CNOT Unitary"}
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-xs">
-                <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+              <div className="bg-white border border-slate-200 p-3 rounded-xl shadow-xs">
+                <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold">
                   <Layers className="w-3.5 h-3.5" />
-                  <span>4 Labs</span>
+                  <span>{coreMode === "classical" ? "Operating Temp" : "Cryogenics"}</span>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
-                  Bloch & Circuit Builder
+                <div className="text-xs text-slate-600 mt-1 font-mono">
+                  {coreMode === "classical" ? "300 K (Room Temp)" : "15 mK Sub-Kelvin Stage"}
                 </div>
               </div>
             </div>
