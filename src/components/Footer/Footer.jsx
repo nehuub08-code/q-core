@@ -4,7 +4,7 @@ import { INSTITUTION_INFO } from "../../data/academicContent";
 
 export default function Footer({ onNavigate }) {
   return (
-    <footer className="border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#090D16] relative z-10 pt-16 pb-12 transition-colors">
+    <footer className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 relative z-10 pt-16 pb-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           {/* Brand & Mission */}

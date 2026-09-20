@@ -32,8 +32,8 @@ export default function BenchmarkCenter() {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white border border-slate-200 p-3 rounded-xl shadow-xl text-xs font-mono">
-          <p className="text-slate-900 font-bold mb-1">{`Dataset / Input Size: ${label}`}</p>
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-xl shadow-xl text-xs font-mono">
+          <p className="text-slate-900 dark:text-white font-bold mb-1">{`Dataset / Input Size: ${label}`}</p>
           {payload.map((entry, index) => (
             <p key={`item-${index}`} style={{ color: entry.color }}>
               {`${entry.name}: ${
@@ -56,14 +56,14 @@ export default function BenchmarkCenter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-semibold tracking-wide">
-            <Activity className="w-3.5 h-3.5 text-amber-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300 text-xs font-semibold tracking-wide">
+            <Activity className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             Performance & Complexity Analysis
           </div>
-          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
             Computational Complexity & Benchmarks
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
             Directly test theoretical speedups: compare classical polynomial/exponential slowdown against quantum polynomial algorithms (Shor's, Grover's, VQE).
           </p>
         </div>
@@ -85,7 +85,7 @@ export default function BenchmarkCenter() {
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-xs cursor-pointer ${
                 selectedProblemId === p.id
                   ? "bg-blue-600 text-white shadow-sm scale-105"
-                  : "bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                  : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700"
               }`}
             >
               {p.name}
@@ -94,40 +94,40 @@ export default function BenchmarkCenter() {
         </div>
 
         {/* Benchmark Dashboard Container */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-8 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-8 shadow-sm">
           {/* Active Problem Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-slate-200 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-slate-200 dark:border-slate-700 pb-6">
             <div className="md:col-span-8 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-mono text-xs font-bold border border-indigo-200">
+                <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-bold border border-indigo-200 dark:border-indigo-800">
                   {currentProblem.speedupType}
                 </span>
-                <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900">
+                <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900 dark:text-white">
                   {currentProblem.name}
                 </h3>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {currentProblem.description} {currentProblem.realWorldImpact}
               </p>
             </div>
 
             {/* Complexity Badges */}
-            <div className="md:col-span-4 space-y-2 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs font-mono shadow-xs">
-              <div className={`flex items-center justify-between p-2 rounded-xl transition-all ${algoDomain === "classical" ? "bg-blue-50 border border-blue-200" : ""}`}>
-                <span className="text-blue-700 font-bold flex items-center gap-1.5">
+            <div className="md:col-span-4 space-y-2 bg-slate-50 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs font-mono shadow-xs">
+              <div className={`flex items-center justify-between p-2 rounded-xl transition-all ${algoDomain === "classical" ? "bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800" : ""}`}>
+                <span className="text-blue-700 dark:text-blue-400 font-bold flex items-center gap-1.5">
                   <Cpu className="w-3.5 h-3.5" />
                   Classical:
                 </span>
-                <span className="text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 font-semibold">
+                <span className="text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 font-semibold">
                   {currentProblem.classicalAlgo}
                 </span>
               </div>
-              <div className={`flex items-center justify-between p-2 rounded-xl transition-all ${algoDomain === "quantum" ? "bg-indigo-50 border border-indigo-200" : ""}`}>
-                <span className="text-indigo-700 font-bold flex items-center gap-1.5">
+              <div className={`flex items-center justify-between p-2 rounded-xl transition-all ${algoDomain === "quantum" ? "bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800" : ""}`}>
+                <span className="text-indigo-700 dark:text-indigo-400 font-bold flex items-center gap-1.5">
                   <Atom className="w-3.5 h-3.5" />
                   Quantum:
                 </span>
-                <span className="text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 font-semibold">
+                <span className="text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 font-semibold">
                   {currentProblem.quantumAlgo}
                 </span>
               </div>
@@ -217,31 +217,31 @@ export default function BenchmarkCenter() {
           )}
 
           {activeMetric === "parallel" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-200 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 items-center">
               {/* Classical Von Neumann Parallelism */}
-              <div className="space-y-3 p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-bold text-blue-600">
+              <div className="space-y-3 p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400">
                   <Cpu className="w-4 h-4" />
                   <span>Sequential / Multi-Core Classical Model</span>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Classical computers run threads across discrete CPU cores. Even with 128 cores, each core calculates 1 state at a time sequentially.
                 </p>
-                <div className="font-mono text-xs text-slate-900 bg-slate-100 p-3 rounded-lg border border-slate-200">
+                <div className="font-mono text-xs text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-700/60 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
                   States Explored = Cores × Clock Frequency (Linear Scaling)
                 </div>
               </div>
 
               {/* Quantum Hilbert Space Parallelism */}
-              <div className="space-y-3 p-5 rounded-2xl bg-white border border-indigo-200 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-bold text-indigo-600">
+              <div className="space-y-3 p-5 rounded-2xl bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800/60 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
                   <Atom className="w-4 h-4" />
                   <span>Inherent Quantum Superposition Model</span>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Quantum processors do not just run fast—they operate in a 2^N dimensional Hilbert state space simultaneously. A 50-qubit processor calculates 1.12 quadrillion states at once.
                 </p>
-                <div className="font-mono text-xs text-slate-900 bg-slate-100 p-3 rounded-lg border border-slate-200">
+                <div className="font-mono text-xs text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-700/60 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
                   States Explored = 2^N Simultaneous Amplitudes (Exponential)
                 </div>
               </div>

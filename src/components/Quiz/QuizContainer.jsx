@@ -34,18 +34,18 @@ export default function QuizContainer({ onQuizComplete }) {
   };
 
   return (
-    <section id="quiz" className="py-24 relative bg-white">
+    <section id="quiz" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold tracking-wide">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide">
             <Award className="w-3.5 h-3.5" />
             3-Tier Assessment & Certification
           </div>
-          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
             Curriculum Mastery Challenge
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
             Test your knowledge of Classical vs Quantum microprocessors across three difficulty tiers. Complete Level 3 to claim your academic certification.
           </p>
         </div>
@@ -71,38 +71,38 @@ export default function QuizContainer({ onQuizComplete }) {
                   sound.playClick();
                   setActiveLevel(lvl.level);
                 }}
-                className={`p-5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
+                className={`p-5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs cursor-pointer ${
                   isSelected
-                    ? "bg-white border-blue-600 ring-2 ring-blue-500/20 shadow-md scale-102"
-                    : "bg-white border-slate-200 hover:border-blue-400 hover:shadow-xs"
+                    ? "bg-white dark:bg-slate-800 border-blue-600 ring-2 ring-blue-500/20 shadow-md scale-102"
+                    : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-xs"
                 }`}
               >
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold border border-blue-200">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-800">
                       {lvl.type}
                     </span>
                     {isDone && (
-                      <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600">
+                      <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Completed
                       </span>
                     )}
                   </div>
-                  <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
                     {lvl.title}
                   </h4>
-                  <p className="text-xs text-slate-500">{lvl.subtitle}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{lvl.subtitle}</p>
                 </div>
 
-                <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                <ChevronRight className="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
               </button>
             );
           })}
         </div>
 
         {/* Level Interactive Body */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
           {activeLevel === 1 && <Level1_MCQ mode={mode} onComplete={handleLevelComplete} />}
           {activeLevel === 2 && <Level2_Match mode={mode} onComplete={handleLevelComplete} />}
           {activeLevel === 3 && <Level3_InteractiveBuild mode={mode} onComplete={handleLevelComplete} />}

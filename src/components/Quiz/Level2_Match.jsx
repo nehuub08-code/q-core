@@ -76,13 +76,13 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-slate-200 pb-3 text-xs font-mono">
-        <span className="text-blue-600 font-bold">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 text-xs font-mono">
+        <span className="text-blue-600 dark:text-blue-400 font-bold">
           {mode === "classical" ? "💻 Classical Architecture Match" : "⚛️ Quantum Hardware Match"} • Matched: {Object.keys(matchedPairs).length} of {pairsData.length} pairs
         </span>
         <button
           onClick={handleReset}
-          className="flex items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors"
+          className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3 h-3" />
           Reset Pairs
@@ -92,7 +92,7 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left: Components Column */}
         <div className="space-y-3">
-          <span className="text-xs font-bold text-slate-900 uppercase tracking-wider block">
+          <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
             1. Select Component:
           </span>
           {pairsData.map((item) => {
@@ -104,16 +104,16 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
                 key={item.id}
                 onClick={() => handleComponentClick(item.id)}
                 disabled={isMatched}
-                className={`w-full p-3.5 rounded-xl border text-left text-xs sm:text-sm font-semibold transition-all flex items-center justify-between ${
+                className={`w-full p-3.5 rounded-xl border text-left text-xs sm:text-sm font-semibold transition-all flex items-center justify-between cursor-pointer ${
                   isMatched
-                    ? "bg-emerald-50 border-emerald-300 text-emerald-700 opacity-80"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 opacity-80"
                     : isSelected
                     ? "bg-blue-600 text-white shadow-md scale-102 border-blue-600"
-                    : "bg-white border-slate-200 text-slate-800 hover:border-blue-400 shadow-xs"
+                    : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:border-blue-400 shadow-xs"
                 }`}
               >
                 <span>{item.component}</span>
-                {isMatched && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+                {isMatched && <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
               </button>
             );
           })}
@@ -121,7 +121,7 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
 
         {/* Right: Function & Role Column */}
         <div className="space-y-3">
-          <span className="text-xs font-bold text-slate-900 uppercase tracking-wider block">
+          <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
             2. Match to Physical Role:
           </span>
           {definitions.map((item) => {
@@ -135,16 +135,16 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
                 disabled={isMatched}
                 className={`w-full p-3.5 rounded-xl border text-left text-xs transition-all flex items-center justify-between ${
                   isMatched
-                    ? "bg-emerald-50 border-emerald-300 text-emerald-700 opacity-80"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 opacity-80"
                     : isWrong
-                    ? "bg-rose-50 border-rose-400 text-rose-700 animate-shake"
+                    ? "bg-rose-50 dark:bg-rose-950/60 border-rose-400 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-shake"
                     : selectedComponent
-                    ? "bg-white border-slate-300 text-slate-800 hover:border-blue-500 hover:bg-blue-50/50 shadow-xs cursor-pointer"
-                    : "bg-slate-50 border-slate-200 text-slate-400 cursor-not-allowed"
+                    ? "bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-slate-700 shadow-xs cursor-pointer"
+                    : "bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
                 }`}
               >
                 <span>{item.match}</span>
-                {isMatched && <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />}
+                {isMatched && <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />}
               </button>
             );
           })}
@@ -152,11 +152,11 @@ export default function Level2_Match({ mode = "classical", onComplete }) {
       </div>
 
       {isAllComplete && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-center space-y-2">
-          <span className="font-bold text-emerald-700 block">
+        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-center space-y-2">
+          <span className="font-bold text-emerald-700 dark:text-emerald-300 block">
             ✓ Level 2 Perfect Match Complete!
           </span>
-          <p className="text-xs text-slate-700">
+          <p className="text-xs text-slate-700 dark:text-slate-200">
             All {mode === "classical" ? "classical CPU" : "quantum QPU"} functional pairings accurately identified.
           </p>
         </div>

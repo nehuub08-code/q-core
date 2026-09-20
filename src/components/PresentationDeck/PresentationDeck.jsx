@@ -227,9 +227,9 @@ export default function PresentationDeck() {
         {/* 1. Presentation Mode (16:9 Cinematic Screen with exact slide) */}
         {viewMode === "deck" && (
           <div className="space-y-6">
-            <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 space-y-4 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 p-4 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-sm">
               {/* Slide Screen Container (16:9 Aspect Ratio) */}
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900 border border-slate-300 shadow-xl flex items-center justify-center group">
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 shadow-xl flex items-center justify-center group">
                 <img
                   src={`${import.meta.env.BASE_URL}slides/slide-${currentSlide}.png`}
                   alt={`Slide ${currentSlide}: ${slidesMeta[currentSlide - 1]?.title}`}
@@ -267,22 +267,22 @@ export default function PresentationDeck() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={prevSlide}
-                    className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white text-xs font-semibold transition-all shadow-xs"
+                    className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-700/60 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all shadow-xs cursor-pointer"
                   >
                     ← Previous
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-all shadow-xs"
+                    className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-all shadow-xs cursor-pointer"
                   >
                     Next Slide →
                   </button>
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                       isPlaying
                         ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400"
-                        : "bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300"
+                        : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-700/60 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200"
                     }`}
                   >
                     {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -298,7 +298,7 @@ export default function PresentationDeck() {
 
             {/* Thumbnail Strip */}
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
                 {slideFilter === "classical" ? "Classical Track Slides:" : "Quantum Track Slides:"}
               </span>
               <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-2">
@@ -309,7 +309,7 @@ export default function PresentationDeck() {
                     className={`relative aspect-[16/9] rounded-xl overflow-hidden border-2 transition-all cursor-pointer group ${
                       currentSlide === s.num
                         ? "border-blue-600 shadow-md scale-105"
-                        : "border-slate-200 hover:border-blue-400 opacity-80 hover:opacity-100"
+                        : "border-slate-200 dark:border-slate-700 hover:border-blue-400 opacity-80 hover:opacity-100"
                     }`}
                     title={`Go to slide ${s.num}: ${s.title}`}
                   >
@@ -334,7 +334,7 @@ export default function PresentationDeck() {
             {filteredSlides.map((slide) => (
               <div
                 key={slide.num}
-                className="bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-blue-500 transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md"
+                className="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md"
               >
                 <div>
                   <div className="relative aspect-[16/9] bg-slate-900 overflow-hidden">
@@ -354,10 +354,10 @@ export default function PresentationDeck() {
                   </div>
 
                   <div className="p-4 space-y-1.5">
-                    <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
                       {slide.title}
                     </h4>
-                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
                       {slide.desc}
                     </p>
                   </div>
@@ -370,7 +370,7 @@ export default function PresentationDeck() {
                       setCurrentSlide(slide.num);
                       setViewMode("deck");
                     }}
-                    className="w-full py-2 rounded-xl bg-slate-100 hover:bg-blue-600 hover:text-white border border-slate-200 text-xs font-semibold text-slate-700 transition-all text-center shadow-xs cursor-pointer"
+                    className="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-700/60 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white dark:hover:text-white border border-slate-200 dark:border-slate-600 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-all text-center shadow-xs cursor-pointer"
                   >
                     View in Presentation Deck
                   </button>

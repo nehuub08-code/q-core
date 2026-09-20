@@ -1,46 +1,66 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext({
+  theme: "bright",
   isDark: false,
+  setTheme: () => {},
+  cycleTheme: () => {},
   toggleTheme: () => {}
 });
 
 export function ThemeProvider({ children }) {
-  // Read saved preference or default to false (Bright theme)
-  const [isDark, setIsDark] = useState(() => {
+  // 3 themes: 'bright' | 'light' | 'dark'
+  const [theme, setThemeState] = useState(() => {
     try {
       const saved = localStorage.getItem("qcore_theme_mode");
-      if (saved === "dark") return true;
-      if (saved === "light") return false;
-      return false; // default to bright
+      if (saved === "dark" || saved === "light" || saved === "bright") {
+        return saved;
+      }
+      return "bright"; // default to bright
     } catch (e) {
-      return false;
+      return "bright";
     }
   });
 
-  useEffect(() => {
+  const applyThemeClasses = (targetTheme) => {
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add("dark");
-      root.classList.remove("light");
-      try {
-        localStorage.setItem("qcore_theme_mode", "dark");
-      } catch (e) {}
-    } else {
-      root.classList.remove("dark");
-      root.classList.add("light");
-      try {
-        localStorage.setItem("qcore_theme_mode", "light");
-      } catch (e) {}
-    }
-  }, [isDark]);
+    root.classList.remove("dark", "light", "theme-bright", "theme-light", "theme-dark");
 
-  const toggleTheme = () => {
-    setIsDark((prev) => !prev);
+    if (targetTheme === "dark") {
+      root.classList.add("dark", "theme-dark");
+    } else if (targetTheme === "light") {
+      root.classList.add("light", "theme-light");
+    } else {
+      // bright
+      root.classList.add("light", "theme-bright");
+    }
   };
 
+  useEffect(() => {
+    applyThemeClasses(theme);
+    try {
+      localStorage.setItem("qcore_theme_mode", theme);
+    } catch (e) {}
+  }, [theme]);
+
+  const setTheme = (nextTheme) => {
+    if (nextTheme === "bright" || nextTheme === "light" || nextTheme === "dark") {
+      setThemeState(nextTheme);
+    }
+  };
+
+  const cycleTheme = () => {
+    setThemeState((current) => {
+      if (current === "bright") return "light";
+      if (current === "light") return "dark";
+      return "bright";
+    });
+  };
+
+  const isDark = theme === "dark";
+
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, isDark, setTheme, cycleTheme, toggleTheme: cycleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

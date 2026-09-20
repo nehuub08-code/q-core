@@ -14,15 +14,15 @@ export default function QuantumPipeline() {
   };
 
   return (
-    <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/15 space-y-8">
+    <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-8 shadow-sm">
       <div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#7C4DFF] animate-pulse" />
-          <h3 className="font-['Orbitron'] text-xl font-bold text-white">
+          <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse" />
+          <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900 dark:text-white">
             Working of a Quantum Microprocessor
           </h3>
         </div>
-        <p className="text-xs text-[#94A3B8] font-mono mt-1">
+        <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">
           Exact Pipeline from Reference PPT • Slide 5 (Input Data → Qubits → Superposition → Gates → Processing → Measurement → Output)
         </p>
       </div>
@@ -36,27 +36,27 @@ export default function QuantumPipeline() {
               <React.Fragment key={s.step}>
                 <button
                   onClick={() => handleStepClick(s.step)}
-                  className={`flex-1 p-3 rounded-2xl border text-center transition-all duration-300 relative group ${
+                  className={`flex-1 p-3 rounded-2xl border text-center transition-all duration-200 relative group cursor-pointer ${
                     isActive
-                      ? "bg-gradient-to-b from-[#7C4DFF]/20 to-[#00E5FF]/10 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.4)] scale-105"
-                      : "bg-[#050B18]/60 border-white/10 hover:border-white/20 hover:bg-white/5"
+                      ? "bg-indigo-600 text-white border-indigo-600 shadow-md scale-105"
+                      : "bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 shadow-xs"
                   }`}
                 >
-                  <span className="text-[10px] font-mono text-[#00E5FF] block mb-1">
+                  <span className={`text-[10px] font-mono font-bold block mb-1 ${isActive ? "text-indigo-100" : "text-indigo-600 dark:text-indigo-400"}`}>
                     Step 0{s.step}
                   </span>
-                  <span className="font-['Orbitron'] text-xs font-bold text-white block leading-tight">
+                  <span className={`font-['Plus_Jakarta_Sans'] text-xs font-bold block leading-tight ${isActive ? "text-white" : "text-slate-900 dark:text-white"}`}>
                     {s.title}
                   </span>
                   {s.title.includes("Gates") && (
-                    <span className="text-[9px] font-mono text-[#7C4DFF] block mt-1">
+                    <span className={`text-[9px] font-mono block mt-1 ${isActive ? "text-indigo-200" : "text-indigo-600 dark:text-indigo-400"}`}>
                       H, X, CNOT
                     </span>
                   )}
                 </button>
 
                 {idx < steps.length - 1 && (
-                  <ChevronRight className="w-4 h-4 text-white/30 shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-600 shrink-0" />
                 )}
               </React.Fragment>
             );
@@ -65,26 +65,26 @@ export default function QuantumPipeline() {
       </div>
 
       {/* Active Step Deep-Dive Card */}
-      <div className="p-6 rounded-2xl bg-[#050B18]/80 border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-xs">
         <div className="md:col-span-8 space-y-2">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded bg-[#7C4DFF]/20 text-[#7C4DFF] font-mono text-xs font-bold border border-[#7C4DFF]/40">
+            <span className="px-2.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-bold border border-indigo-200 dark:border-indigo-800">
               Stage 0{activeStep} of 07
             </span>
-            <span className="font-['Orbitron'] text-lg font-bold text-white">
+            <span className="font-['Plus_Jakarta_Sans'] text-lg font-bold text-slate-900 dark:text-white">
               {steps[activeStep - 1]?.title}
             </span>
           </div>
-          <p className="text-sm text-[#94A3B8] leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             {steps[activeStep - 1]?.desc}
           </p>
         </div>
 
-        <div className="md:col-span-4 p-4 rounded-xl bg-white/5 border border-white/10 text-center space-y-2">
-          <span className="text-[10px] uppercase font-mono text-[#00E5FF] block tracking-wider">
+        <div className="md:col-span-4 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center space-y-2 shadow-xs">
+          <span className="text-[10px] uppercase font-mono font-bold text-indigo-600 dark:text-indigo-400 block tracking-wider">
             Flowchart Transformation
           </span>
-          <div className="font-mono text-xs text-white">
+          <div className="font-mono text-xs font-bold text-slate-900 dark:text-white">
             {activeStep === 1 && "Classical Bitstream → Pulse Shaping"}
             {activeStep === 2 && "|0⟩ Ground State Initialized"}
             {activeStep === 3 && "|ψ⟩ = (|0⟩ + |1⟩)/√2 Entangled"}

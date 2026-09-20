@@ -114,18 +114,18 @@ export default function LearningDashboard({ completedLabs = {}, quizScore = 0 })
   const currentAchievements = mode === "classical" ? classicalAchievements : quantumAchievements;
 
   return (
-    <section id="analytics" className="py-24 relative bg-slate-50/50">
+    <section id="analytics" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold tracking-wide">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide">
             <BarChart3 className="w-3.5 h-3.5" />
             Telemetry & Competency Tracking
           </div>
-          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
             Learning Analytics & Hardware Honors
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
             Monitor hardware telemetry, simulation milestones, and course badges tailored specifically to Classical CPU or Quantum QPU tracks.
           </p>
         </div>
@@ -142,166 +142,166 @@ export default function LearningDashboard({ completedLabs = {}, quizScore = 0 })
         {mode === "classical" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* CPU Clock Frequency */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Clock Frequency
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   4.80 GHz
                 </div>
-                <span className="text-[11px] font-semibold text-blue-600">
+                <span className="text-[11px] font-semibold text-blue-600 dark:text-blue-400">
                   Dynamic Boost Turbo
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center">
-                <Cpu className="w-6 h-6 text-blue-600" />
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center">
+                <Cpu className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
             </div>
 
             {/* IPC Throughput */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Instructions / Cycle (IPC)
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   2.65 IPC
                 </div>
-                <span className="text-[11px] font-semibold text-emerald-600">
+                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                   Out-of-Order Execution
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
-                <Zap className="w-6 h-6 text-emerald-600" />
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
+                <Zap className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
             </div>
 
             {/* L1 Cache Hit Rate */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   L1 Cache Hit Rate
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   99.2%
                 </div>
-                <span className="text-[11px] font-semibold text-indigo-600">
+                <span className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
                   ~1.2 ns Latency
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center">
-                <Layers className="w-6 h-6 text-indigo-600" />
+              <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center">
+                <Layers className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               </div>
             </div>
 
             {/* Thermal Dissipation */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Thermal Design Power
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   65 Watts
                 </div>
-                <span className="text-[11px] font-semibold text-amber-600">
+                <span className="text-[11px] font-semibold text-amber-600 dark:text-amber-400">
                   Room Temperature (22°C)
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center">
-                <Flame className="w-6 h-6 text-amber-600" />
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                <Flame className="w-6 h-6 text-amber-600 dark:text-amber-400" />
               </div>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Cryogenic Base Temp */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Dilution Base Temp
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   14.8 mK
                 </div>
-                <span className="text-[11px] font-semibold text-blue-600">
+                <span className="text-[11px] font-semibold text-blue-600 dark:text-blue-400">
                   Near Absolute Zero (-273.13°C)
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center">
-                <Snowflake className="w-6 h-6 text-blue-600" />
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center">
+                <Snowflake className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
             </div>
 
             {/* Qubit Coherence T1 */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Qubit Coherence Time (T₁)
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   125 μs
                 </div>
-                <span className="text-[11px] font-semibold text-indigo-600">
+                <span className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
                   Transmon Relaxation Time
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center">
-                <Atom className="w-6 h-6 text-indigo-600" />
+              <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center">
+                <Atom className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               </div>
             </div>
 
             {/* Single-Qubit Gate Fidelity */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Single-Qubit Gate Fidelity
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   99.95%
                 </div>
-                <span className="text-[11px] font-semibold text-emerald-600">
+                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                   Microwave Pulse Control
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
+                <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
             </div>
 
             {/* Two-Qubit CZ Fidelity */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 flex items-center justify-between shadow-xs">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   Two-Qubit CZ Fidelity
                 </span>
-                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900">
+                <div className="font-['Plus_Jakarta_Sans'] text-2xl font-bold text-slate-900 dark:text-white">
                   99.60%
                 </div>
-                <span className="text-[11px] font-semibold text-amber-600">
+                <span className="text-[11px] font-semibold text-amber-600 dark:text-amber-400">
                   Fault-Tolerant Threshold
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-amber-600" />
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-amber-600 dark:text-amber-400" />
               </div>
             </div>
           </div>
         )}
 
         {/* Gamification: Badges Showcase */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4">
             <div>
-              <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-blue-600" />
+              <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 {mode === "classical" ? "Classical Microprocessor Honors" : "Quantum Computing Honors"}
               </h3>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Milestones awarded through interactive laboratory simulations and academic curriculum evaluations
               </p>
             </div>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
               {currentAchievements.filter(a => a.isUnlocked).length} of 5 Unlocked
             </span>
           </div>
@@ -314,8 +314,8 @@ export default function LearningDashboard({ completedLabs = {}, quizScore = 0 })
                   key={badge.id}
                   className={`p-5 rounded-2xl border text-center transition-all duration-200 relative group flex flex-col items-center justify-between shadow-xs ${
                     badge.isUnlocked
-                      ? "bg-white border-slate-200 hover:border-blue-500 hover:scale-102 hover:shadow-sm"
-                      : "bg-slate-50 border-slate-200 opacity-60"
+                      ? "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:scale-102 hover:shadow-sm"
+                      : "bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-700 opacity-60"
                   }`}
                 >
                   <div className="space-y-3">
@@ -332,23 +332,23 @@ export default function LearningDashboard({ completedLabs = {}, quizScore = 0 })
                     </div>
 
                     <div>
-                      <h4 className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-slate-900">
+                      <h4 className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-slate-900 dark:text-white">
                         {badge.title}
                       </h4>
-                      <p className="text-[10px] text-slate-500 mt-1 line-clamp-2">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                         {badge.desc}
                       </p>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-2 border-t border-slate-100 w-full flex items-center justify-center gap-1 text-[10px] font-medium">
+                  <div className="mt-4 pt-2 border-t border-slate-100 dark:border-slate-700 w-full flex items-center justify-center gap-1 text-[10px] font-medium">
                     {badge.isUnlocked ? (
-                      <span className="text-emerald-600 flex items-center gap-1 font-bold">
+                      <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-bold">
                         <CheckCircle2 className="w-3 h-3" />
                         Unlocked
                       </span>
                     ) : (
-                      <span className="text-slate-400 flex items-center gap-1">
+                      <span className="text-slate-400 dark:text-slate-500 flex items-center gap-1">
                         <Lock className="w-3 h-3" />
                         Locked
                       </span>

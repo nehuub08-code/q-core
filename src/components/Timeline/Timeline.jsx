@@ -31,14 +31,14 @@ export default function Timeline() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold tracking-wide mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide mb-4">
             <Calendar className="w-3.5 h-3.5" />
             Architectural Evolution
           </div>
-          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          <h2 className="font-['Plus_Jakarta_Sans'] font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">
             {timelineMode === "classical" ? "Classical Microprocessor Evolution" : "Quantum Hardware & QPU Breakthroughs"}
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-3">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3">
             {timelineMode === "classical"
               ? "From 1940s thermionic vacuum bulbs to modern 3nm EUV multi-core silicon CMOS supercomputing."
               : "From Feynman's 1981 vision to Shor's factoring, Google Sycamore supremacy, and fault-tolerant logical QPUs."}
@@ -56,7 +56,7 @@ export default function Timeline() {
         {/* Horizontal Timeline Bar with SVG connecting track */}
         <div className="relative mb-12 mt-8">
           {/* Connecting Track */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-1/2 rounded-full overflow-hidden">
+          <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 dark:bg-slate-700 -translate-y-1/2 rounded-full overflow-hidden">
             <motion.div
               className={`h-full ${timelineMode === "classical" ? "bg-blue-600" : "bg-indigo-600"}`}
               initial={{ width: "0%" }}
@@ -73,12 +73,12 @@ export default function Timeline() {
                 <button
                   key={m.year + m.title}
                   onClick={() => handleSelect(idx)}
-                  className={`flex flex-col items-center text-center p-3.5 rounded-2xl bg-white border transition-all duration-200 relative group shadow-xs cursor-pointer ${
+                  className={`flex flex-col items-center text-center p-3.5 rounded-2xl bg-white dark:bg-slate-800 border transition-all duration-200 relative group shadow-xs cursor-pointer ${
                     isSelected
                       ? timelineMode === "classical"
                         ? "border-blue-600 ring-2 ring-blue-500/20 shadow-md scale-105"
                         : "border-indigo-600 ring-2 ring-indigo-500/20 shadow-md scale-105"
-                      : "border-slate-200 hover:border-slate-400"
+                      : "border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500"
                   }`}
                 >
                   {/* Indicator Dot */}
@@ -88,16 +88,16 @@ export default function Timeline() {
                         ? timelineMode === "classical"
                           ? "bg-blue-600 border-white scale-110 shadow-xs"
                           : "bg-indigo-600 border-white scale-110 shadow-xs"
-                        : "bg-slate-300 border-white group-hover:bg-slate-400"
+                        : "bg-slate-300 dark:bg-slate-600 border-white dark:border-slate-800 group-hover:bg-slate-400"
                     }`}
                   />
-                  <span className={`text-xs font-bold ${timelineMode === "classical" ? "text-blue-600" : "text-indigo-600"}`}>
+                  <span className={`text-xs font-bold ${timelineMode === "classical" ? "text-blue-600 dark:text-blue-400" : "text-indigo-600 dark:text-indigo-400"}`}>
                     {m.year}
                   </span>
-                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-semibold text-slate-800 mt-1 line-clamp-1">
+                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-semibold text-slate-800 dark:text-slate-100 mt-1 line-clamp-1">
                     {m.title}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-mono mt-0.5">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                     {timelineMode === "classical" ? `Era 0${idx + 1}` : `Milestone 0${idx + 1}`}
                   </span>
                 </button>
@@ -114,44 +114,44 @@ export default function Timeline() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 relative overflow-hidden shadow-sm"
+            className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 relative overflow-hidden shadow-sm"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* Left Column: Narrative & Breakthrough */}
               <div className="lg:col-span-7 space-y-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <span
-                    className="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider text-white"
+                    className="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider text-white shadow-xs"
                     style={{ backgroundColor: selectedMilestone.color }}
                   >
                     {selectedMilestone.year}
                   </span>
-                  <span className="text-xs font-semibold text-slate-600">
+                  <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">
                     {selectedMilestone.era}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl text-slate-900">
+                  <h3 className="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl text-slate-900 dark:text-white">
                     {selectedMilestone.title}
                   </h3>
-                  <p className={`text-xs font-mono mt-1 ${timelineMode === "classical" ? "text-blue-600" : "text-indigo-600"}`}>
+                  <p className={`text-xs font-mono mt-1 ${timelineMode === "classical" ? "text-blue-600 dark:text-blue-400" : "text-indigo-600 dark:text-indigo-400"}`}>
                     {selectedMilestone.subtitle}
                   </p>
                 </div>
 
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {selectedMilestone.description}
                 </p>
 
                 {/* Key Breakthrough Banner */}
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
-                  <Sparkles className={`w-5 h-5 flex-shrink-0 mt-0.5 ${timelineMode === "classical" ? "text-blue-600" : "text-indigo-600"}`} />
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
+                  <Sparkles className={`w-5 h-5 flex-shrink-0 mt-0.5 ${timelineMode === "classical" ? "text-blue-600 dark:text-blue-400" : "text-indigo-600 dark:text-indigo-400"}`} />
                   <div>
-                    <span className="text-xs font-bold text-slate-900 block uppercase tracking-wider">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white block uppercase tracking-wider">
                       Architectural Breakthrough:
                     </span>
-                    <p className="text-xs text-slate-600 mt-0.5">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
                       {selectedMilestone.breakthrough}
                     </p>
                   </div>
@@ -160,19 +160,19 @@ export default function Timeline() {
 
               {/* Right Column: Key Technical Specifications */}
               <div className="lg:col-span-5 space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">
                   Hardware Metrics & Parameters:
                 </span>
                 <div className="space-y-2.5">
                   {selectedMilestone.specs.map((spec, i) => (
                     <div
                       key={i}
-                      className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between shadow-xs hover:border-slate-300 transition-colors"
+                      className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-xs hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
                     >
-                      <span className="text-xs text-slate-500 font-medium">
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                         {spec.label}
                       </span>
-                      <span className="text-xs font-mono font-bold text-slate-900">
+                      <span className="text-xs font-mono font-bold text-slate-900 dark:text-white">
                         {spec.value}
                       </span>
                     </div>

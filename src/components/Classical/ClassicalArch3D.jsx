@@ -143,7 +143,7 @@ function Motherboard3D({ selectedComponent, onSelectComponent }) {
               className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono tracking-wider transition-all whitespace-nowrap shadow-md ${
                 selectedComponent === spot.id
                   ? "bg-white text-black scale-110"
-                  : "bg-[#050B18]/90 text-white border border-white/20 hover:border-[#00E5FF]"
+                  : "bg-slate-900/90 text-white border border-slate-700 hover:border-cyan-400"
               }`}
             >
               {spot.label}
@@ -166,7 +166,7 @@ export default function ClassicalArch3D({ components, selectedId, onSelect }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       {/* 3D Motherboard Canvas */}
-      <div className="lg:col-span-7 h-[420px] rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
+      <div className="lg:col-span-7 h-[420px] rounded-3xl bg-slate-900 border border-slate-700 relative overflow-hidden shadow-md">
         <Canvas camera={{ position: [3.8, 3.2, 3.8], fov: 46 }}>
           <ambientLight intensity={0.8} />
           <directionalLight position={[5, 8, 5]} intensity={1.5} color="#FFFFFF" />
@@ -182,11 +182,11 @@ export default function ClassicalArch3D({ components, selectedId, onSelect }) {
         </Canvas>
 
         {/* Floating Canvas Tag */}
-        <div className="absolute top-4 left-4 bg-[#050B18]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-xs font-mono text-[#00E5FF]">
+        <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-xl border border-slate-700 text-xs font-mono text-cyan-400">
           3D Microarchitecture Die View
         </div>
         <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none">
-          <span className="text-[11px] text-[#94A3B8]/80 font-mono">
+          <span className="text-[11px] text-slate-400 font-mono">
             Click on a module or hotspot pin to inspect circuitry
           </span>
         </div>
@@ -194,31 +194,31 @@ export default function ClassicalArch3D({ components, selectedId, onSelect }) {
 
       {/* Component Inspector Card */}
       <div className="lg:col-span-5 space-y-4">
-        <div className="flex items-center gap-2 text-xs font-['Orbitron'] font-semibold text-[#00E5FF] uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
           <span>Component Inspector</span>
         </div>
 
-        <div className="glass-panel p-6 rounded-3xl border border-white/15 space-y-4">
-          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
             <div>
-              <h3 className="font-['Orbitron'] text-xl font-bold text-white">
+              <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900 dark:text-white">
                 {selectedInfo.name}
               </h3>
-              <p className="text-xs font-mono text-[#38BDF8] mt-0.5">
+              <p className="text-xs font-mono text-blue-600 dark:text-blue-400 mt-0.5">
                 {selectedInfo.role}
               </p>
             </div>
-            <span className="px-2.5 py-1 rounded-md bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 text-xs font-mono font-bold">
+            <span className="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-mono font-bold">
               Active
             </span>
           </div>
 
-          <p className="text-sm text-[#94A3B8] leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             {selectedInfo.description}
           </p>
 
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#F8FAFC]">
-            <span className="text-[#38BDF8] block text-[10px] uppercase tracking-wider mb-1 font-bold">
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200">
+            <span className="text-blue-600 dark:text-blue-400 block text-[10px] uppercase tracking-wider mb-1 font-bold">
               Silicon Hardware Metrics
             </span>
             {selectedInfo.stats}
@@ -230,10 +230,10 @@ export default function ClassicalArch3D({ components, selectedId, onSelect }) {
               <button
                 key={c.id}
                 onClick={() => handleSelect(c.id)}
-                className={`px-2 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all truncate ${
+                className={`px-2 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all truncate cursor-pointer ${
                   selectedId === c.id
-                    ? "bg-[#00E5FF] text-[#050B18] shadow-[0_0_10px_rgba(0,229,255,0.5)]"
-                    : "bg-white/5 text-[#94A3B8] hover:text-white hover:bg-white/10"
+                    ? "bg-blue-600 text-white shadow-xs"
+                    : "bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600"
                 }`}
               >
                 {c.id.toUpperCase()}
