@@ -9,11 +9,6 @@ import { Zap, RotateCcw, Sparkles, CheckCircle2 } from "lucide-react";
 function BlochSphereScene({ theta, phi, isMeasuring, measuredState }) {
   const sphereRadius = 1.6;
 
-  // Calculate tip coordinates (mapping: Z is up in quantum physics; in Three.js, Y is up, Z is depth)
-  // Let's map:
-  // Quantum Z (|0⟩ / |1⟩) -> Three.js Y
-  // Quantum X (|+⟩ / |-⟩) -> Three.js X
-  // Quantum Y (|i⟩ / |-i⟩) -> Three.js Z
   const x = sphereRadius * Math.sin(theta) * Math.cos(phi);
   const y = sphereRadius * Math.cos(theta); // North pole: theta=0 -> y=R
   const z = sphereRadius * Math.sin(theta) * Math.sin(phi);
@@ -135,15 +130,11 @@ export default function BlochSphere3D() {
     setMeasurementResult(null);
 
     setTimeout(() => {
-      // Quantum collapse based on prob0
       const collapsed = Math.random() < prob0 ? 0 : 1;
       setMeasurementResult(collapsed);
       setIsCollapsing(false);
       sound.playSuccess();
-      // Temporarily snap theta to collapsed pole
-      if (collapsed === 0) setTheta(0);
-      else setTheta(Math.PI);
-    }, 450);
+    }, 600);
   };
 
   const applyPreset = (presetTheta, presetPhi) => {
@@ -154,16 +145,16 @@ export default function BlochSphere3D() {
   };
 
   return (
-    <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+    <div className="bg-white dark:bg-slate-900/80 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/15 space-y-6 shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse" />
-            <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-bold text-slate-900">
+            <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-slate-900 dark:text-white">
               Interactive 3D Bloch Sphere Simulator
             </h3>
           </div>
-          <p className="text-xs text-slate-500 font-mono mt-1">
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">
             Visualizing single-qubit pure state superposition in 3D Hilbert Space
           </p>
         </div>
@@ -175,7 +166,7 @@ export default function BlochSphere3D() {
             className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shadow-xs ${
               theta === 0
                 ? "bg-blue-600 text-white shadow-sm"
-                : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/20"
             }`}
           >
             |0⟩ Ground
@@ -185,7 +176,7 @@ export default function BlochSphere3D() {
             className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shadow-xs ${
               theta === Math.PI
                 ? "bg-indigo-600 text-white shadow-sm"
-                : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/20"
             }`}
           >
             |1⟩ Excited
@@ -195,7 +186,7 @@ export default function BlochSphere3D() {
             className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shadow-xs ${
               theta === Math.PI / 2 && phi === 0
                 ? "bg-purple-600 text-white shadow-sm"
-                : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/20"
             }`}
           >
             |+⟩ Superposition
@@ -205,7 +196,7 @@ export default function BlochSphere3D() {
             className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shadow-xs ${
               theta === Math.PI / 2 && phi === Math.PI / 2
                 ? "bg-emerald-600 text-white shadow-sm"
-                : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200"
+                : "bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/20"
             }`}
           >
             |i⟩ Phase State
@@ -215,7 +206,7 @@ export default function BlochSphere3D() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* 3D Canvas */}
-        <div className="lg:col-span-7 h-[420px] rounded-3xl border border-slate-300 relative overflow-hidden bg-slate-950 shadow-inner">
+        <div className="lg:col-span-7 h-[420px] rounded-3xl border border-slate-300 dark:border-slate-700 relative overflow-hidden bg-slate-950 shadow-inner">
           <Canvas camera={{ position: [2.8, 2.4, 3.2], fov: 46 }}>
             <ambientLight intensity={0.9} />
             <pointLight position={[6, 8, 6]} intensity={1.5} color="#00E5FF" />
@@ -248,13 +239,13 @@ export default function BlochSphere3D() {
         {/* Live Math & Controls */}
         <div className="lg:col-span-5 space-y-5">
           {/* Live Mathematical State Equation Card */}
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-            <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider block">
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 space-y-2 shadow-xs">
+            <span className="text-xs font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider block">
               Live State Equation: |ψ⟩ = α|0⟩ + β|1⟩
             </span>
-            <div className="p-3 rounded-xl bg-white font-mono text-xs sm:text-sm text-slate-900 tracking-wide border border-slate-200 shadow-xs">
-              |ψ⟩ = <span className="text-blue-600 font-bold">{alphaVal}</span>|0⟩ +{" "}
-              <span className="text-indigo-600 font-bold">
+            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 font-mono text-xs sm:text-sm text-slate-900 dark:text-white tracking-wide border border-slate-200 dark:border-white/10 shadow-xs">
+              |ψ⟩ = <span className="text-blue-600 dark:text-blue-400 font-bold">{alphaVal}</span>|0⟩ +{" "}
+              <span className="text-indigo-600 dark:text-indigo-400 font-bold">
                 ({betaMagnitude} {phiDeg !== 0 ? `· e^{i·${phiDeg}°}` : ""})
               </span>
               |1⟩
@@ -265,8 +256,8 @@ export default function BlochSphere3D() {
           <div className="space-y-4">
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-slate-700 font-semibold">Polar Angle θ (Superposition Weight):</span>
-                <span className="text-blue-600 font-bold">
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">Polar Angle θ (Superposition Weight):</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold">
                   {(theta / Math.PI).toFixed(2)}π ({(theta * (180 / Math.PI)).toFixed(0)}°)
                 </span>
               </div>
@@ -280,14 +271,14 @@ export default function BlochSphere3D() {
                   setTheta(Number(e.target.value));
                   setMeasurementResult(null);
                 }}
-                className="w-full accent-blue-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
+                className="w-full accent-blue-600 h-2 bg-slate-200 dark:bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
 
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-slate-700 font-semibold">Azimuthal Phase φ (Quantum Phase):</span>
-                <span className="text-indigo-600 font-bold">
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">Azimuthal Phase φ (Quantum Phase):</span>
+                <span className="text-indigo-700 dark:text-indigo-400 font-bold">
                   {(phi / Math.PI).toFixed(2)}π ({(phi * (180 / Math.PI)).toFixed(0)}°)
                 </span>
               </div>
@@ -301,7 +292,7 @@ export default function BlochSphere3D() {
                   setPhi(Number(e.target.value));
                   setMeasurementResult(null);
                 }}
-                className="w-full accent-indigo-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
+                className="w-full accent-indigo-600 h-2 bg-slate-200 dark:bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
           </div>
@@ -310,10 +301,10 @@ export default function BlochSphere3D() {
           <div className="space-y-3 pt-2">
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-blue-700 font-bold">P(|0⟩) = |α|²:</span>
-                <span className="font-bold text-slate-800">{(prob0 * 100).toFixed(1)}%</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold">P(|0⟩) = |α|²:</span>
+                <span className="font-bold text-slate-900 dark:text-white">{(prob0 * 100).toFixed(1)}%</span>
               </div>
-              <div className="h-3 rounded-full bg-slate-100 border border-slate-200 overflow-hidden">
+              <div className="h-3 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 overflow-hidden">
                 <div
                   className="h-full bg-blue-600 transition-all duration-150"
                   style={{ width: `${prob0 * 100}%` }}
@@ -323,10 +314,10 @@ export default function BlochSphere3D() {
 
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-indigo-700 font-bold">P(|1⟩) = |β|²:</span>
-                <span className="font-bold text-slate-800">{(prob1 * 100).toFixed(1)}%</span>
+                <span className="text-indigo-700 dark:text-indigo-400 font-bold">P(|1⟩) = |β|²:</span>
+                <span className="font-bold text-slate-900 dark:text-white">{(prob1 * 100).toFixed(1)}%</span>
               </div>
-              <div className="h-3 rounded-full bg-slate-100 border border-slate-200 overflow-hidden">
+              <div className="h-3 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 overflow-hidden">
                 <div
                   className="h-full bg-indigo-600 transition-all duration-150"
                   style={{ width: `${prob1 * 100}%` }}
@@ -342,14 +333,14 @@ export default function BlochSphere3D() {
               disabled={isCollapsing}
               className="flex-1 py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
             >
-              <Zap className="w-4 h-4 fill-current" />
+              <Zap className="w-4 h-4 fill-current text-indigo-200" />
               <span>{isCollapsing ? "Collapsing Wavefunction..." : "Measure / Collapse Qubit"}</span>
             </button>
 
             {measurementResult !== null && (
-              <div className="px-4 py-3 rounded-xl bg-slate-100 border border-slate-300 text-center">
-                <span className="text-[10px] text-slate-500 block uppercase font-mono">Output</span>
-                <span className="font-bold text-lg text-slate-900">
+              <div className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-center">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block uppercase font-mono">Output</span>
+                <span className="font-bold text-lg text-slate-900 dark:text-white">
                   |{measurementResult}⟩
                 </span>
               </div>

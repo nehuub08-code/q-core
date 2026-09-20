@@ -6,33 +6,41 @@ const ThemeContext = createContext({
 });
 
 export function ThemeProvider({ children }) {
-  // Always default to false (Clean Bright theme)
-  const [isDark, setIsDark] = useState(false);
+  // Read saved preference or default to false (Bright theme)
+  const [isDark, setIsDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem("qcore_theme_mode");
+      if (saved === "dark") return true;
+      if (saved === "light") return false;
+      return false; // default to bright
+    } catch (e) {
+      return false;
+    }
+  });
 
   useEffect(() => {
-    // Purge any legacy dark keys
-    try {
-      localStorage.removeItem("qcore_theme");
-      localStorage.removeItem("qcore_theme_mode");
-      localStorage.removeItem("qcore_theme_v2");
-    } catch(e) {}
-    
-    // Explicitly enforce light mode on mount
     const root = document.documentElement;
-    root.classList.remove("dark");
-    root.classList.add("light");
-  }, []);
+    if (isDark) {
+      root.classList.add("dark");
+      root.classList.remove("light");
+      try {
+        localStorage.setItem("qcore_theme_mode", "dark");
+      } catch (e) {}
+    } else {
+      root.classList.remove("dark");
+      root.classList.add("light");
+      try {
+        localStorage.setItem("qcore_theme_mode", "light");
+      } catch (e) {}
+    }
+  }, [isDark]);
 
   const toggleTheme = () => {
-    // Keep in Bright Mode as requested
-    const root = document.documentElement;
-    root.classList.remove("dark");
-    root.classList.add("light");
-    setIsDark(false);
+    setIsDark((prev) => !prev);
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark: false, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

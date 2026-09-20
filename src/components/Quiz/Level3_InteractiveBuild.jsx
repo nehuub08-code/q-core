@@ -88,43 +88,45 @@ export default function Level3_InteractiveBuild({ mode = "classical", onComplete
     <div className="space-y-6">
       {mode === "classical" ? (
         /* Classical Architecture Challenge */
-        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
             <div className="flex items-center gap-2">
-              <Cpu className="w-5 h-5 text-blue-600" />
-              <h4 className="font-['Plus_Jakarta_Sans'] text-base font-bold text-slate-900">
+              <Cpu className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <h4 className="font-['Plus_Jakarta_Sans'] text-base font-bold text-slate-900 dark:text-white">
                 Classical Challenge: Sequence the Instruction Cycle (Slide 2)
               </h4>
             </div>
             {cpuSuccess && (
-              <span className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-600">
+              <span className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
                 <CheckCircle2 className="w-4 h-4" />
                 Cycle Verified!
               </span>
             )}
           </div>
 
-          <p className="text-xs text-slate-600">
-            Click available micro-operation steps in the exact sequential order followed by classical microprocessors:
+          <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+            Click the micro-operation steps below in the exact sequential order followed by classical microprocessors:
           </p>
 
-          {/* 4 Ordered Slots */}
+          {/* 4 Ordered Slots - High Contrast, Crystal Clear */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {["1. Fetch", "2. Decode", "3. Execute", "4. Store"].map((label, idx) => (
               <div
                 key={idx}
                 onClick={() => handleClearCpuSlot(idx)}
-                className={`p-4 rounded-xl border text-center font-mono cursor-pointer transition-all ${
+                className={`p-4 rounded-xl border-2 text-center font-mono cursor-pointer transition-all ${
                   cpuSlots[idx]
                     ? cpuSuccess
-                      ? "bg-emerald-50 border-emerald-400 text-emerald-700 font-bold"
-                      : "bg-blue-50 border-blue-400 text-blue-800 font-bold"
-                    : "bg-white border-dashed border-slate-300 text-slate-400"
+                      ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-extrabold shadow-xs"
+                      : "bg-blue-50 dark:bg-blue-950/40 border-blue-500 text-blue-900 dark:text-blue-300 font-extrabold shadow-xs"
+                    : "bg-white dark:bg-slate-800/80 border-dashed border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-500"
                 }`}
               >
-                <div className="text-[10px] text-slate-400 uppercase">{label}</div>
-                <div className="text-sm font-bold mt-1">
-                  {cpuSlots[idx] || "(Click step)"}
+                <div className="text-xs font-mono font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wide">
+                  {label}
+                </div>
+                <div className="text-sm font-extrabold mt-1.5 text-blue-700 dark:text-cyan-400">
+                  {cpuSlots[idx] || "(Click step below)"}
                 </div>
               </div>
             ))}
@@ -132,13 +134,13 @@ export default function Level3_InteractiveBuild({ mode = "classical", onComplete
 
           {/* Available Steps */}
           <div className="space-y-2 pt-2">
-            <span className="text-xs font-bold text-slate-700 block">Available Cycle Steps:</span>
+            <span className="text-xs font-bold text-slate-900 dark:text-white block">Available Cycle Steps:</span>
             <div className="flex flex-wrap gap-2">
               {availableCpuSteps.map((step) => (
                 <button
                   key={step}
                   onClick={() => handlePickStep(step)}
-                  className="px-4 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-300 hover:border-blue-500 text-slate-800 font-bold text-xs transition-all shadow-xs"
+                  className="px-4 py-2 rounded-xl bg-white hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:border-blue-500 text-slate-900 dark:text-white font-extrabold text-xs transition-all shadow-xs"
                 >
                   + {step}
                 </button>
@@ -147,47 +149,47 @@ export default function Level3_InteractiveBuild({ mode = "classical", onComplete
           </div>
 
           {cpuSuccess && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold">
+            <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-300 text-xs font-semibold">
               ✓ Classical Instruction Cycle accurately sequenced: 1. Fetch instruction from memory via PC → 2. Control Unit decodes → 3. ALU executes → 4. Write back / Store result to register.
             </div>
           )}
         </div>
       ) : (
         /* Quantum Architecture Challenge */
-        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
             <div className="flex items-center gap-2">
-              <Atom className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-['Plus_Jakarta_Sans'] text-base font-bold text-slate-900">
+              <Atom className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              <h4 className="font-['Plus_Jakarta_Sans'] text-base font-bold text-slate-900 dark:text-white">
                 Quantum Challenge: Synthesize a 2-Qubit Bell State (|00⟩ + |11⟩)/√2
               </h4>
             </div>
             {quantumSuccess && (
-              <span className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-600">
+              <span className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
                 <CheckCircle2 className="w-4 h-4" />
                 State Synthesized!
               </span>
             )}
           </div>
 
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
             Apply the Hadamard (H) gate to Qubit 0 to enter superposition, then activate the CNOT entangling coupler to create maximal quantum entanglement:
           </p>
 
-          <div className="p-4 rounded-xl bg-white border border-slate-200 space-y-4 shadow-xs">
+          <div className="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 space-y-4 shadow-xs">
             {/* Qubit 0 Rail */}
             <div className="flex items-center gap-4">
-              <span className="font-mono text-xs font-bold text-slate-700 w-16">|q0⟩ = |0⟩</span>
-              <div className="flex-1 h-0.5 bg-slate-300 relative flex items-center">
+              <span className="font-mono text-xs font-bold text-slate-900 dark:text-white w-16">|q0⟩ = |0⟩</span>
+              <div className="flex-1 h-0.5 bg-slate-300 dark:bg-white/20 relative flex items-center">
                 <button
                   onClick={() => {
                     sound.playQuantumBeep();
                     setQuantumQ0Gate(quantumQ0Gate === "H" ? null : "H");
                   }}
-                  className={`px-3 py-1.5 rounded-lg border font-mono text-xs font-bold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-lg border font-mono text-xs font-bold transition-all ${
                     quantumQ0Gate === "H"
                       ? "bg-indigo-600 border-indigo-600 text-white shadow-xs"
-                      : "bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700"
+                      : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200"
                   }`}
                 >
                   {quantumQ0Gate === "H" ? "H Gate (Active)" : "+ Insert H Gate"}
@@ -197,17 +199,17 @@ export default function Level3_InteractiveBuild({ mode = "classical", onComplete
 
             {/* Qubit 1 Rail */}
             <div className="flex items-center gap-4">
-              <span className="font-mono text-xs font-bold text-slate-700 w-16">|q1⟩ = |0⟩</span>
-              <div className="flex-1 h-0.5 bg-slate-300 relative flex items-center">
+              <span className="font-mono text-xs font-bold text-slate-900 dark:text-white w-16">|q1⟩ = |0⟩</span>
+              <div className="flex-1 h-0.5 bg-slate-300 dark:bg-white/20 relative flex items-center">
                 <button
                   onClick={() => {
                     sound.playClick();
                     setQuantumCoupler(!quantumCoupler);
                   }}
-                  className={`px-3 py-1.5 rounded-lg border font-mono text-xs font-bold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-lg border font-mono text-xs font-bold transition-all ${
                     quantumCoupler
                       ? "bg-blue-600 border-blue-600 text-white shadow-xs"
-                      : "bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700"
+                      : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200"
                   }`}
                 >
                   {quantumCoupler ? "CNOT Entangler (Linked)" : "+ Engage CNOT Coupler"}
@@ -227,7 +229,7 @@ export default function Level3_InteractiveBuild({ mode = "classical", onComplete
           </div>
 
           {quantumSuccess && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold">
+            <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-300 text-xs font-semibold">
               ✓ Bell State (|Φ⁺⟩ = (|00⟩ + |11⟩)/√2) successfully synthesized! The two qubits are now maximally entangled via superposition and conditional inversion.
             </div>
           )}

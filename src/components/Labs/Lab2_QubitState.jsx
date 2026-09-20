@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Html } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { Zap, RotateCcw, Sparkles, BarChart2, Atom, Layers } from "lucide-react";
 import { sound } from "../../utils/audioEffects";
@@ -16,20 +16,20 @@ function MiniBloch({ theta, phi }) {
     <group>
       <mesh>
         <sphereGeometry args={[radius, 24, 24]} />
-        <meshStandardMaterial color="#0F172A" transparent opacity={0.35} roughness={0.1} />
+        <meshStandardMaterial color="#64748B" transparent opacity={0.15} roughness={0.1} />
       </mesh>
       <mesh>
         <sphereGeometry args={[radius + 0.005, 12, 12]} />
-        <meshBasicMaterial color="#7C4DFF" wireframe transparent opacity={0.2} />
+        <meshBasicMaterial color="#4F46E5" wireframe transparent opacity={0.3} />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[radius - 0.02, radius + 0.02, 48]} />
-        <meshBasicMaterial color="#00E5FF" side={THREE.DoubleSide} transparent opacity={0.5} />
+        <meshBasicMaterial color="#0284C7" side={THREE.DoubleSide} transparent opacity={0.6} />
       </mesh>
       {/* Z Axis */}
       <mesh>
         <cylinderGeometry args={[0.012, 0.012, radius * 2.4, 8]} />
-        <meshBasicMaterial color="#00E5FF" />
+        <meshBasicMaterial color="#2563EB" />
       </mesh>
       {/* State Vector */}
       <line>
@@ -40,11 +40,11 @@ function MiniBloch({ theta, phi }) {
             geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
           }}
         />
-        <lineBasicMaterial color="#FFFFFF" linewidth={2} />
+        <lineBasicMaterial color="#E11D48" linewidth={3} />
       </line>
       <mesh position={[x, y, z]}>
-        <sphereGeometry args={[0.08, 12, 12]} />
-        <meshStandardMaterial color="#FFFFFF" emissive="#00E5FF" emissiveIntensity={1.5} />
+        <sphereGeometry args={[0.09, 16, 16]} />
+        <meshStandardMaterial color="#E11D48" emissive="#E11D48" emissiveIntensity={0.8} />
       </mesh>
     </group>
   );
@@ -108,36 +108,36 @@ export default function Lab2_QubitState({ onLabComplete }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
-          <h3 className="font-['Orbitron'] text-xl font-bold text-white flex items-center gap-2">
-            <Atom className="w-5 h-5 text-[#7C4DFF]" />
+          <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+            <Atom className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             Lab 02: Qubit State & IBM Quantum Composer Lab
           </h3>
-          <p className="text-xs text-[#94A3B8] font-mono mt-1">
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">
             Superposition Simulator, Unitary Gate Pulses & Statistical Collapse
           </p>
         </div>
 
-        {/* Gate Pulse Toolbar */}
+        {/* Gate Pulse Toolbar - Crisp, High Contrast in Bright & Dark */}
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={applyHadamard}
-            className="px-3 py-1.5 rounded-xl bg-[#7C4DFF]/20 border border-[#7C4DFF]/60 text-white font-mono font-bold text-xs hover:bg-[#7C4DFF] hover:text-black transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white dark:bg-indigo-950/40 dark:hover:bg-indigo-600 border border-indigo-300 dark:border-indigo-700 dark:text-indigo-300 dark:hover:text-white font-mono font-bold text-xs transition-all shadow-xs"
             title="Hadamard Gate (Create Superposition)"
           >
             Gate H
           </button>
           <button
             onClick={applyPauliX}
-            className="px-3 py-1.5 rounded-xl bg-[#00E5FF]/20 border border-[#00E5FF]/60 text-white font-mono font-bold text-xs hover:bg-[#00E5FF] hover:text-black transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-cyan-50 hover:bg-cyan-600 text-cyan-800 hover:text-white dark:bg-cyan-950/40 dark:hover:bg-cyan-600 border border-cyan-300 dark:border-cyan-700 dark:text-cyan-300 dark:hover:text-white font-mono font-bold text-xs transition-all shadow-xs"
             title="Pauli-X (Quantum NOT Gate)"
           >
             Gate X
           </button>
           <button
             onClick={applyPauliZ}
-            className="px-3 py-1.5 rounded-xl bg-[#F59E0B]/20 border border-[#F59E0B]/60 text-white font-mono font-bold text-xs hover:bg-[#F59E0B] hover:text-black transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-600 text-amber-800 hover:text-white dark:bg-amber-950/40 dark:hover:bg-amber-600 border border-amber-300 dark:border-amber-700 dark:text-amber-300 dark:hover:text-white font-mono font-bold text-xs transition-all shadow-xs"
             title="Pauli-Z (Phase Flip Gate)"
           >
             Gate Z
@@ -146,15 +146,15 @@ export default function Lab2_QubitState({ onLabComplete }) {
           <button
             onClick={runShotsMeasurement}
             disabled={isSampling}
-            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#7C4DFF] to-[#00E5FF] text-[#050B18] font-bold font-['Orbitron'] text-xs flex items-center gap-1.5 shadow-lg glow-purple active:scale-95 disabled:opacity-50"
+            className="px-4 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 disabled:opacity-50 transition-all"
           >
-            <Zap className="w-3.5 h-3.5 fill-current" />
+            <Zap className="w-3.5 h-3.5 fill-current text-indigo-200" />
             <span>{isSampling ? "Sampling 1024 Shots..." : "Measure Qubit"}</span>
           </button>
 
           <button
             onClick={handleReset}
-            className="p-1.5 rounded-xl bg-white/5 border border-white/10 text-[#94A3B8] hover:text-white"
+            className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-300"
             title="Reset to Ground State |0⟩"
           >
             <RotateCcw className="w-4 h-4" />
@@ -162,39 +162,44 @@ export default function Lab2_QubitState({ onLabComplete }) {
         </div>
       </div>
 
-      {/* Grid: 3D Bloch & Composer Controls */}
+      {/* Main Lab 2 Interactive Console */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        {/* Left: 3D Bloch Visualizer */}
-        <div className="lg:col-span-6 h-[340px] rounded-2xl glass-panel border border-white/10 relative overflow-hidden bg-[#050B18]/90">
-          <Canvas camera={{ position: [2.5, 2.0, 2.5], fov: 45 }}>
-            <ambientLight intensity={0.9} />
-            <pointLight position={[5, 5, 5]} intensity={1.5} color="#00E5FF" />
-            <pointLight position={[-5, -5, -5]} intensity={1.0} color="#7C4DFF" />
+        {/* Left: 3D Mini Bloch Sphere Canvas */}
+        <div className="lg:col-span-6 h-[300px] sm:h-[340px] rounded-3xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 overflow-hidden relative shadow-inner">
+          <Canvas camera={{ position: [0, 1.2, 3.2], fov: 50 }}>
+            <ambientLight intensity={1.2} />
+            <pointLight position={[10, 10, 10]} intensity={1.5} />
             <MiniBloch theta={theta} phi={phi} />
-            <OrbitControls enableZoom={false} enablePan={false} />
+            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.8} />
           </Canvas>
-          <div className="absolute top-3 left-3 bg-[#050B18]/80 px-2.5 py-0.5 rounded-lg border border-white/10 font-mono text-[10px] text-[#7C4DFF]">
-            3D Bloch State Vector
+
+          {/* Canvas Floating Coordinates */}
+          <div className="absolute top-3 left-3 bg-white/90 dark:bg-black/60 border border-slate-200 dark:border-white/10 rounded-xl px-2.5 py-1 text-[11px] font-mono text-slate-800 dark:text-slate-200 backdrop-blur-md shadow-xs">
+            θ: {(theta / Math.PI).toFixed(2)}π | φ: {(phi / Math.PI).toFixed(2)}π
           </div>
         </div>
 
-        {/* Right: Telemetry & State Equation */}
+        {/* Right: State Vectors & Controls */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="p-4 rounded-xl bg-[#050B18]/80 border border-white/10 space-y-2">
-            <span className="text-[10px] uppercase font-['Orbitron'] font-bold text-[#00E5FF] tracking-wider">
-              State Vector Formula
+          {/* Mathematical State Display */}
+          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 space-y-2 shadow-xs">
+            <span className="text-[10px] uppercase font-mono font-bold text-indigo-600 dark:text-indigo-400 tracking-wider block">
+              Quantum State Vector:
             </span>
-            <div className="font-mono text-sm text-white bg-black/50 p-2.5 rounded-lg border border-white/5">
-              |ψ⟩ = {Math.cos(theta / 2).toFixed(3)}|0⟩ + {Math.sin(theta / 2).toFixed(3)}|1⟩
+            <div className="font-mono text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
+              |ψ⟩ = {Math.cos(theta / 2).toFixed(2)} |0⟩ + {Math.sin(theta / 2).toFixed(2)} e^(i{(phi / Math.PI).toFixed(2)}π) |1⟩
             </div>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              Superposition coefficients |α|² + |β|² = 1.00 (Normalization satisfied)
+            </p>
           </div>
 
-          {/* Theta & Phi Controls */}
-          <div className="space-y-3">
+          {/* Interactive Angle Sliders */}
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 space-y-3">
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-mono">
-                <span className="text-white">Polar Theta (θ):</span>
-                <span className="text-[#00E5FF] font-bold">{(theta / Math.PI).toFixed(2)}π</span>
+              <div className="flex justify-between text-xs font-mono font-semibold">
+                <span className="text-slate-800 dark:text-slate-200">Colatitude Theta (θ):</span>
+                <span className="text-blue-700 dark:text-cyan-400 font-bold">{(theta / Math.PI).toFixed(2)}π rad</span>
               </div>
               <input
                 type="range"
@@ -206,14 +211,14 @@ export default function Lab2_QubitState({ onLabComplete }) {
                   setTheta(Number(e.target.value));
                   setMeasurementData(null);
                 }}
-                className="w-full accent-[#00E5FF] h-1.5 bg-white/10 rounded-lg cursor-pointer"
+                className="w-full accent-blue-600 h-2 bg-slate-200 dark:bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
 
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-mono">
-                <span className="text-white">Phase Phi (φ):</span>
-                <span className="text-[#7C4DFF] font-bold">{(phi / Math.PI).toFixed(2)}π</span>
+              <div className="flex justify-between text-xs font-mono font-semibold">
+                <span className="text-slate-800 dark:text-slate-200">Phase Phi (φ):</span>
+                <span className="text-indigo-700 dark:text-indigo-400 font-bold">{(phi / Math.PI).toFixed(2)}π rad</span>
               </div>
               <input
                 type="range"
@@ -225,22 +230,26 @@ export default function Lab2_QubitState({ onLabComplete }) {
                   setPhi(Number(e.target.value));
                   setMeasurementData(null);
                 }}
-                className="w-full accent-[#7C4DFF] h-1.5 bg-white/10 rounded-lg cursor-pointer"
+                className="w-full accent-indigo-600 h-2 bg-slate-200 dark:bg-white/10 rounded-lg cursor-pointer"
               />
             </div>
           </div>
 
-          {/* Probabilities */}
+          {/* Probabilities - High-Contrast Visible Cards */}
           <div className="grid grid-cols-2 gap-3 pt-1">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-              <span className="text-[10px] text-[#00E5FF] font-mono block">P(|0⟩)</span>
-              <span className="font-['Space_Grotesk'] text-lg font-bold text-white">
+            <div className="p-3.5 rounded-2xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/40 text-center shadow-xs">
+              <span className="text-xs text-blue-700 dark:text-blue-400 font-mono font-bold block mb-1">
+                P(|0⟩)
+              </span>
+              <span className="font-['Space_Grotesk'] text-2xl font-extrabold text-slate-900 dark:text-white">
                 {(prob0 * 100).toFixed(1)}%
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-              <span className="text-[10px] text-[#7C4DFF] font-mono block">P(|1⟩)</span>
-              <span className="font-['Space_Grotesk'] text-lg font-bold text-white">
+            <div className="p-3.5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/40 text-center shadow-xs">
+              <span className="text-xs text-indigo-700 dark:text-indigo-400 font-mono font-bold block mb-1">
+                P(|1⟩)
+              </span>
+              <span className="font-['Space_Grotesk'] text-2xl font-extrabold text-slate-900 dark:text-white">
                 {(prob1 * 100).toFixed(1)}%
               </span>
             </div>
@@ -248,15 +257,15 @@ export default function Lab2_QubitState({ onLabComplete }) {
         </div>
       </div>
 
-      {/* Measurement Sampling Histogram (IBM Quantum Style) */}
+      {/* Measurement Sampling Histogram */}
       {measurementData && (
-        <div className="p-5 rounded-2xl bg-[#050B18]/90 border border-white/15 space-y-4">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2">
-            <span className="text-xs font-['Orbitron'] font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <BarChart2 className="w-4 h-4 text-[#00E5FF]" />
+        <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-2">
+            <span className="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               Multi-Shot Quantum Measurement Histogram (1,024 Shots)
             </span>
-            <span className="text-[10px] font-mono text-[#22C55E]">
+            <span className="text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400">
               Wavefunction Collapsed
             </span>
           </div>
@@ -265,12 +274,12 @@ export default function Lab2_QubitState({ onLabComplete }) {
             {/* |0⟩ Result Bar */}
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-[#00E5FF] font-bold">Outcome |0⟩:</span>
-                <span className="text-white font-bold">{measurementData.count0} shots ({((measurementData.count0 / shots) * 100).toFixed(1)}%)</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold">Outcome |0⟩:</span>
+                <span className="text-slate-900 dark:text-white font-bold">{measurementData.count0} shots ({((measurementData.count0 / shots) * 100).toFixed(1)}%)</span>
               </div>
-              <div className="h-6 rounded-lg bg-white/10 overflow-hidden p-0.5">
+              <div className="h-6 rounded-lg bg-slate-200 dark:bg-white/10 overflow-hidden p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-[#00E5FF] to-[#38BDF8] rounded transition-all duration-500"
+                  className="h-full bg-blue-600 dark:bg-blue-500 rounded transition-all duration-500"
                   style={{ width: `${(measurementData.count0 / shots) * 100}%` }}
                 />
               </div>
@@ -279,12 +288,12 @@ export default function Lab2_QubitState({ onLabComplete }) {
             {/* |1⟩ Result Bar */}
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-[#7C4DFF] font-bold">Outcome |1⟩:</span>
-                <span className="text-white font-bold">{measurementData.count1} shots ({((measurementData.count1 / shots) * 100).toFixed(1)}%)</span>
+                <span className="text-indigo-700 dark:text-indigo-400 font-bold">Outcome |1⟩:</span>
+                <span className="text-slate-900 dark:text-white font-bold">{measurementData.count1} shots ({((measurementData.count1 / shots) * 100).toFixed(1)}%)</span>
               </div>
-              <div className="h-6 rounded-lg bg-white/10 overflow-hidden p-0.5">
+              <div className="h-6 rounded-lg bg-slate-200 dark:bg-white/10 overflow-hidden p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-[#7C4DFF] to-[#A855F7] rounded transition-all duration-500"
+                  className="h-full bg-indigo-600 dark:bg-indigo-500 rounded transition-all duration-500"
                   style={{ width: `${(measurementData.count1 / shots) * 100}%` }}
                 />
               </div>
