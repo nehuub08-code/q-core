@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Live Educational Web Application:** [https://aryaman174757-code.github.io/q-core/](https://aryaman174757-code.github.io/q-core/)
+> **Live Educational Web Application:** [https://nehuub08-code.github.io/q-core/](https://nehuub08-code.github.io/q-core/)
 
 ---
 
@@ -87,7 +87,7 @@ This industry-grade interactive educational platform was developed based on the 
 
 ```bash
 # Clone the repository
-git clone https://github.com/aryaman174757-code/q-core.git
+git clone https://github.com/nehuub08-code/q-core.git
 
 # Navigate to project directory
 cd q-core
