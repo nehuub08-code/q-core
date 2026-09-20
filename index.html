@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" class="light theme-bright scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/q-core/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Q-CORE: Industry-Level Interactive Educational Platform on Classical vs Quantum Microprocessors. Explore 3D chips, Bloch Sphere, CPU simulators, and Virtual Labs." />
+    <title>Q-CORE | Quantum vs Classical Microprocessor Educational Experience</title>
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <!-- Initialize Theme: Bright, Light, or Dark with Bright as default -->
+    <script>
+      try {
+        var mode = localStorage.getItem('qcore_theme_mode') || 'bright';
+        var root = document.documentElement;
+        root.classList.remove('dark', 'light', 'theme-bright', 'theme-light', 'theme-dark');
+        if (mode === 'dark') {
+          root.classList.add('dark', 'theme-dark');
+        } else if (mode === 'light') {
+          root.classList.add('light', 'theme-light');
+        } else {
+          root.classList.add('light', 'theme-bright');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('light', 'theme-bright');
+      }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/q-core/assets/index-CT8p2rkS.js"></script>
+    <link rel="stylesheet" crossorigin href="/q-core/assets/index-z5w0feKu.css">
+  </head>
+  <body class="bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased selection:bg-blue-500/20 selection:text-blue-600 overflow-x-hidden min-h-screen transition-colors duration-200">
+    <div id="root"></div>
+  </body>
+</html>
